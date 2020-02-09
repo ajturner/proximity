@@ -1,0 +1,38 @@
+{
+  "name": "proximity",
+  "version": "0.0.1",
+  "description": "Stencil Component Starter",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/proximity/proximity.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@stencil/core": "^1.8.4"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@esri/arcgis-rest-auth": "^2.8.1",
+    "@esri/arcgis-rest-feature-layer": "^2.8.1",
+    "@esri/arcgis-rest-geocoding": "^2.8.1",
+    "@esri/arcgis-rest-portal": "^2.8.1",
+    "@esri/arcgis-rest-request": "^2.8.1",
+    "@esri/calcite-components": "^1.0.0-beta.18",
+    "@esri/calcite-ui-icons": "^2.7.1",
+    "@types/node": "^13.7.0"
+  }
+}
