@@ -1,0 +1,51 @@
+{
+  "entries": [
+    "components/hub-radar/hub-radar.js",
+    "components/topic/topic.js",
+    "components/proximity-input/proximity-input.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "1.8.4",
+    "typescriptVersion": "3.7.2"
+  },
+  "collections": [
+    {
+      "name": "@esri/calcite-components",
+      "tags": [
+        "calcite-accordion",
+        "calcite-accordion-item",
+        "calcite-alert",
+        "calcite-button",
+        "calcite-checkbox",
+        "calcite-date-day",
+        "calcite-date-month",
+        "calcite-date-month-header",
+        "calcite-date-picker",
+        "calcite-dropdown",
+        "calcite-dropdown-group",
+        "calcite-dropdown-item",
+        "calcite-example",
+        "calcite-icon",
+        "calcite-loader",
+        "calcite-modal",
+        "calcite-notice",
+        "calcite-pagination",
+        "calcite-popover",
+        "calcite-progress",
+        "calcite-radio-group",
+        "calcite-radio-group-item",
+        "calcite-slider",
+        "calcite-switch",
+        "calcite-tab",
+        "calcite-tab-nav",
+        "calcite-tab-title",
+        "calcite-tabs",
+        "calcite-tooltip",
+        "calcite-tree",
+        "calcite-tree-item"
+      ]
+    }
+  ],
+  "bundles": []
+}
