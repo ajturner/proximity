@@ -9,23 +9,26 @@ import { loadCss, loadModules } from "esri-loader";
 export class ProximityMap {
   @Element() hostElement: HTMLElement;
   @Prop() webmap: string;
-  @Prop({ mutable: true, reflect: true }) center: string;
-  @Prop({ mutable: true }) zoom: string;
-  @State() mapCenter: [number, number];
-  @State() mapZoom: number;
+  @Prop({ mutable: true, reflect: true }) center: string = "[-77,38.9]";
+  @Prop({ mutable: true, reflect: true }) zoom: string = "4";
+  @State() mapCenter: [number, number] = [-77, 38.9];
+  @State() mapZoom: number = 4;
   
   @Watch('center')
   centerDidChangeHandler(newCenter: string) {
     if(newCenter) {
-      console.log("centerDidChangeHandler", newCenter)
       this.mapCenter = JSON.parse(newCenter);
+      console.log("centerDidChangeHandler", [this.mapCenter, this.mapZoom])
+      this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }
   
   @Watch('zoom')
   zoomDidChangeHandler(newZoom: string) {
     if(newZoom) {
-     this.mapZoom = JSON.parse(newZoom);
+     this.mapZoom = JSON.parse(newZoom);  
+     console.log("zoomDidChangeHandler", [this.mapCenter, this.mapZoom])
+     this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }  
 
@@ -45,8 +48,6 @@ export class ProximityMap {
 
   constructor() {
     this.webmap = this.webmap ? this.webmap : "41281c51f9de45edaf1c8ed44bb10e30"
-    this.centerDidChangeHandler(this.center)
-    this.zoomDidChangeHandler(this.zoom)
 
     loadCss(`${this.esriMapOptions.url}/esri/css/main.css`);
 
@@ -62,6 +63,8 @@ export class ProximityMap {
           basemap: "streets"
         });
 
+        this.centerDidChangeHandler(this.center)
+        this.zoomDidChangeHandler(this.zoom)
         // this.municipalitiesFeatureLayer = new FeatureLayer({
         //   url:
         //     "https://services.arcgis.com/Li1xnxaTwJ2lGrgz/arcgis/rest/services/Kommuner/FeatureServer/0"
@@ -93,10 +96,9 @@ export class ProximityMap {
   createEsriMapView() {
     return loadModules(["esri/WebMap", "esri/views/MapView"], this.esriMapOptions).then(
       ([WebMap, MapView]: [__esri.WebMapConstructor, __esri.MapViewConstructor]) => {
-        console.log("Map View", [this.webmap, this.center, this.zoom])
         
         const mapDiv = this.hostElement.querySelector("div");
-        console.log("MapDiv", mapDiv)
+
         let mapOptions: __esri.MapViewProperties = { container: mapDiv }
 
         // Check how the map is initally set
@@ -113,7 +115,6 @@ export class ProximityMap {
           mapOptions.zoom = this.mapZoom;
         }
   
-        console.debug("Loading map view", mapOptions)
         this.esriMapView = new MapView( mapOptions );
       }
     );

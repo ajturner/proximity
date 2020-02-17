@@ -2,14 +2,7 @@ import { queryFeatures, IQueryFeaturesOptions} from '@esri/arcgis-rest-feature-l
 import { getItemData } from "@esri/arcgis-rest-portal";
 import { geocode } from '@esri/arcgis-rest-geocoding';
 
-export function getMessages(webmap: string, address: string): Promise<any> {
-    // First clear previous messages 
-    let messages = [];
-
-    return getMap(webmap, address)
-}
-
-function getLocation(address: any) {
+export function getLocation(address: any) {
     return new Promise((resolve, reject) => {
         geocode(address)
         .then((response) => {
@@ -21,7 +14,7 @@ function getLocation(address: any) {
 
 }
 
-function getMap(id: string, address?: string) {
+export function getMap(id: string, address?: string, coordinates?: any) {
     return new Promise((resolve, reject) => {
         getLocation({
             address: address,

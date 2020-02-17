@@ -3,6 +3,8 @@ export declare class HubRadar {
     messages: any;
     address: string;
     webmap: string;
+    mapCenter: string;
+    mapZoom: string;
     handleAddressUpdated(event: CustomEvent): void;
     componentWillLoad(): void;
     render(): any[];

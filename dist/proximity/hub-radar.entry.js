@@ -3488,11 +3488,6 @@ function bulkGeocode(requestOptions // must POST, which is the default
  * Apache-2.0 */
 //# sourceMappingURL=index.js.map
 
-function getMessages(webmap, address) {
-    // First clear previous messages 
-    let messages = [];
-    return getMap(webmap, address);
-}
 function getLocation(address) {
     return new Promise((resolve, reject) => {
         geocode(address)
@@ -3503,7 +3498,7 @@ function getLocation(address) {
             .catch(reject);
     });
 }
-function getMap(id, address) {
+function getMap(id, address, coordinates) {
     return new Promise((resolve, reject) => {
         getLocation({
             address: address,
@@ -3615,17 +3610,23 @@ function interpretResults(layer, results) {
 const HubRadar = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
+        this.mapCenter = "[-80, 40]";
+        this.mapZoom = "4";
     }
     handleAddressUpdated(event) {
         event.preventDefault();
         console.log("radar handleUpdateAddress", event.detail);
         this.address = event.detail;
-        getMessages(this.webmap, this.address).then(results => {
-            this.messages = results;
+        getLocation(this.address).then(coordinates => {
+            this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
+            this.mapZoom = "16";
+            getMap(this.webmap, this.address, coordinates).then(results => {
+                this.messages = results;
+            });
         });
     }
     componentWillLoad() {
-        getMessages(this.webmap, this.address).then(results => {
+        getMap(this.webmap, this.address).then(results => {
             this.messages = results;
         });
     }
@@ -3634,7 +3635,7 @@ const HubRadar = class {
         // Get Address
         output.push(h("hub-proximity-input", { address: this.address }));
         output.push(h("em", null, "Searching '", this.address, "'"));
-        output.push(h("hub-proximity-map", { class: "proximity-map", webmap: this.webmap }));
+        output.push(h("hub-proximity-map", { class: "proximity-map", center: this.mapCenter, zoom: this.mapZoom, webmap: this.webmap }));
         // output.push(<hub-proximity-map center="[-118, 42]" zoom="4"></hub-proximity-map> )
         // Get Results
         if (this.messages === undefined || this.messages.length == 0) {
