@@ -13,7 +13,7 @@ function getLocation(address: any) {
     return new Promise((resolve, reject) => {
         geocode(address)
         .then((response) => {
-            console.log("getLocation then", response)
+            // console.log("getLocation then", response)
             resolve(response.candidates[0].location); // => { x: -77.036533, y: 38.898719, spatialReference: ... }
         })
         .catch(reject)
@@ -34,7 +34,7 @@ function getMap(id: string, address?: string) {
                 });
 
                 Promise.all(promises).then(results => {
-                    console.log("getMap Promise all", results)
+                    // console.log("getMap Promise all", results)
                     let features = []
                     results.map(r => {
                         

@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, B as Build, d as getElement } from './core-fb92fa04.js';
+import { r as registerInstance, c as createEvent, h, H as Host, B as Build, d as getElement } from './core-18271712.js';
 
 const CalciteDatePicker = class {
     constructor(hostRef) {

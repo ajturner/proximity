@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host, d as getElement } from './core-fb92fa04.js';
+import { r as registerInstance, h, H as Host, d as getElement } from './core-18271712.js';
 import { b as getElementTheme } from './dom-8fd67d72.js';
 
 const CalciteProgress = class {

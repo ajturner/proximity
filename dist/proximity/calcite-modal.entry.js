@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-fb92fa04.js';
+import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-18271712.js';
 import { g as getElementDir, b as getElementTheme } from './dom-8fd67d72.js';
 import { x as x24 } from './index-ca737843.js';
 

@@ -13,6 +13,11 @@ export namespace Components {
   interface HubProximityInput {
     'address': string;
   }
+  interface HubProximityMap {
+    'center': string;
+    'webmap': string;
+    'zoom': string;
+  }
   interface HubRadar {
     'address': string;
     'webmap': string;
@@ -32,6 +37,12 @@ declare global {
     new (): HTMLHubProximityInputElement;
   };
 
+  interface HTMLHubProximityMapElement extends Components.HubProximityMap, HTMLStencilElement {}
+  var HTMLHubProximityMapElement: {
+    prototype: HTMLHubProximityMapElement;
+    new (): HTMLHubProximityMapElement;
+  };
+
   interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {}
   var HTMLHubRadarElement: {
     prototype: HTMLHubRadarElement;
@@ -45,6 +56,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'hub-proximity-input': HTMLHubProximityInputElement;
+    'hub-proximity-map': HTMLHubProximityMapElement;
     'hub-radar': HTMLHubRadarElement;
     'hub-topic': HTMLHubTopicElement;
   }
@@ -54,6 +66,11 @@ declare namespace LocalJSX {
   interface HubProximityInput {
     'address'?: string;
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
+  }
+  interface HubProximityMap {
+    'center'?: string;
+    'webmap'?: string;
+    'zoom'?: string;
   }
   interface HubRadar {
     'address'?: string;
@@ -66,6 +83,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'hub-proximity-input': HubProximityInput;
+    'hub-proximity-map': HubProximityMap;
     'hub-radar': HubRadar;
     'hub-topic': HubTopic;
   }
@@ -78,6 +96,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'hub-proximity-input': LocalJSX.HubProximityInput & JSXBase.HTMLAttributes<HTMLHubProximityInputElement>;
+      'hub-proximity-map': LocalJSX.HubProximityMap & JSXBase.HTMLAttributes<HTMLHubProximityMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-topic': LocalJSX.HubTopic & JSXBase.HTMLAttributes<HTMLHubTopicElement>;
     }

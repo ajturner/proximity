@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './core-fb92fa04.js';
+import { r as registerInstance, h } from './core-18271712.js';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3497,7 +3497,7 @@ function getLocation(address) {
     return new Promise((resolve, reject) => {
         geocode(address)
             .then((response) => {
-            console.log("getLocation then", response);
+            // console.log("getLocation then", response)
             resolve(response.candidates[0].location); // => { x: -77.036533, y: 38.898719, spatialReference: ... }
         })
             .catch(reject);
@@ -3515,7 +3515,7 @@ function getMap(id, address) {
                     return getFeatures(layer, location);
                 });
                 Promise.all(promises).then(results => {
-                    console.log("getMap Promise all", results);
+                    // console.log("getMap Promise all", results)
                     let features = [];
                     results.map(r => {
                         // There may not have been any features from this layer
@@ -3634,6 +3634,8 @@ const HubRadar = class {
         // Get Address
         output.push(h("hub-proximity-input", { address: this.address }));
         output.push(h("em", null, "Searching '", this.address, "'"));
+        output.push(h("hub-proximity-map", { class: "proximity-map", webmap: this.webmap }));
+        // output.push(<hub-proximity-map center="[-118, 42]" zoom="4"></hub-proximity-map> )
         // Get Results
         if (this.messages === undefined || this.messages.length == 0) {
             output.push(h("calcite-loader", { text: "Fetching data...", "is-active": true }));
@@ -3645,7 +3647,7 @@ const HubRadar = class {
         }
         return output;
     }
-    static get style() { return ""; }
+    static get style() { return ".proximity-map {\n    height: 200px;\n}"; }
 };
 
 export { HubRadar as hub_radar };

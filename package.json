@@ -33,6 +33,8 @@
     "@esri/arcgis-rest-request": "^2.8.1",
     "@esri/calcite-components": "^1.0.0-beta.18",
     "@esri/calcite-ui-icons": "^2.7.1",
-    "@types/node": "^13.7.0"
+    "@types/arcgis-js-api": "^4.14.0",
+    "@types/node": "^13.7.0",
+    "esri-loader": "^2.13.0"
   }
 }

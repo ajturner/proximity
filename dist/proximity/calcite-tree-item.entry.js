@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-fb92fa04.js';
+import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-18271712.js';
 import { S as SPACE, a as ENTER, L as LEFT, R as RIGHT, U as UP, D as DOWN, H as HOME, E as END } from './keys-08b2c0fd.js';
 import { c as getSlottedElements, g as getElementDir, n as nodeListToArray } from './dom-8fd67d72.js';
 import { c as chevronRight16 } from './index-ca737843.js';

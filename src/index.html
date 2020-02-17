@@ -9,9 +9,55 @@
   <script nomodule src="/build/proximity.js"></script>
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.18/dist/calcite/calcite.css">
 
+  <style>
+  header { grid-area: header; }
+  .item2 { grid-area: menu; }
+  .item3 { grid-area: main; }
+  .item4 { grid-area: right; }
+  .item5 { grid-area: footer; }
+
+  .container {
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'menu main main main right right'
+      'menu footer footer footer footer footer';
+    grid-gap: 10px;
+    /* background-color: #2196F3; */
+    padding: 10px;
+  }
+
+  .container > div {
+    border: 1px solid #999;
+    min-height: 300px;
+    min-width: 400px;
+    /* background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px; */
+  }
+  </style>
 </head>
 <body>
-  <hub-radar webmap="2e725f2d5b7640b28121af931048894c" address="301 4th St NE, 20002" first="Stencil" last="Loading Proximity"></hub-radar>
+  <div class="container">
+    <header>
+      <h1>Hub Components</h1>
+    </header>
+    
+    <div class="item2">Menu</div>
+    <div class="item3">
+      <hub-proximity-map center="[-77, 38.9]" zoom="9"></hub-proximity-map>
+    </div>  
+    <div class="item4">  
+      <!-- <hub-proximity-map center="[-77, 38.9]" zoom="9"></hub-proximity-map> -->
+      <hub-radar webmap="2e725f2d5b7640b28121af931048894c" address="301 4th St NE, 20002" first="Stencil" last="Loading Proximity"></hub-radar>
+    </div>
+    <div class="item5">
+      <em>in progress</em>
+    </div>
+
+    
+</div>
   
 </body>
 </html>

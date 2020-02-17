@@ -1,6 +1,7 @@
 {
   "entries": [
     "components/hub-radar/hub-radar.js",
+    "components/proximity-map/proximity-map.js",
     "components/topic/topic.js",
     "components/proximity-input/proximity-input.js"
   ],

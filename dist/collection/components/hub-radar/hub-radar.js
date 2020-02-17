@@ -23,6 +23,8 @@ export class HubRadar {
             "Searching '",
             this.address,
             "'"));
+        output.push(h("hub-proximity-map", { class: "proximity-map", webmap: this.webmap }));
+        // output.push(<hub-proximity-map center="[-118, 42]" zoom="4"></hub-proximity-map> )
         // Get Results
         if (this.messages === undefined || this.messages.length == 0) {
             output.push(h("calcite-loader", { text: "Fetching data...", "is-active": true }));
@@ -35,7 +37,6 @@ export class HubRadar {
         return output;
     }
     static get is() { return "hub-radar"; }
-    static get encapsulation() { return "shadow"; }
     static get originalStyleUrls() { return {
         "$": ["hub-radar.css"]
     }; }
@@ -62,7 +63,7 @@ export class HubRadar {
         },
         "webmap": {
             "type": "string",
-            "mutable": true,
+            "mutable": false,
             "complexType": {
                 "original": "string",
                 "resolved": "string",

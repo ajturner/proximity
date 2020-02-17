@@ -1,4 +1,4 @@
-import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-fb92fa04.js';
+import { r as registerInstance, c as createEvent, h, H as Host, d as getElement } from './core-18271712.js';
 import { n as nodeListToArray } from './dom-8fd67d72.js';
 import { g as guid } from './guid-3f4b9e31.js';
 
