@@ -1,7 +1,7 @@
 import { Component, State, h, Prop, Listen} from '@stencil/core';
 // import { format } from '../../utils/utils';
 
-import { getMap, queryMap } from '../../utils/sonar-blip'
+import { getMap, queryMap } from '../../utils/proximity-utils'
 
 @Component({
   tag: 'hub-radar',
@@ -19,7 +19,7 @@ export class HubRadar {
 
   @Prop({ mutable: true }) address: string;
   @Prop() webmap: string;
-  @Prop() showMap: boolean = true;
+  @Prop({ attribute: 'map' }) showMap: boolean = true;
 
   @State() isLoading: boolean = false;
 

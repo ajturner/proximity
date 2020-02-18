@@ -1,6 +1,6 @@
 import { h } from "@stencil/core";
 // import { format } from '../../utils/utils';
-import { getMap, queryMap } from '../../utils/sonar-blip';
+import { getMap, queryMap } from '../../utils/proximity-utils';
 export class HubRadar {
     constructor() {
         this.showMap = true;
@@ -190,7 +190,7 @@ export class HubRadar {
                 "tags": [],
                 "text": ""
             },
-            "attribute": "show-map",
+            "attribute": "map",
             "reflect": false,
             "defaultValue": "true"
         }

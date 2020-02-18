@@ -11,8 +11,26 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface HubProximityInput {
+    /**
+    * Default address to search
+    */
     'address': string;
+    /**
+    * Geographic extent limit for geocoding
+    */
     'extent': any;
+    /**
+    * Value for input placeholder
+    */
+    'placeholder': string;
+    /**
+    * Value for submit button
+    */
+    'submit': string;
+    /**
+    * Values that the auto-complete textbox should search for
+    */
+    'suggestionlist': string[];
   }
   interface HubProximityMap {
     'center': string;
@@ -71,9 +89,30 @@ declare global {
 
 declare namespace LocalJSX {
   interface HubProximityInput {
+    /**
+    * Default address to search
+    */
     'address'?: string;
+    /**
+    * Geographic extent limit for geocoding
+    */
     'extent'?: any;
+    /**
+    * Emits the {address, coordinates} of the geocoded result
+    */
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
+    /**
+    * Value for input placeholder
+    */
+    'placeholder'?: string;
+    /**
+    * Value for submit button
+    */
+    'submit'?: string;
+    /**
+    * Values that the auto-complete textbox should search for
+    */
+    'suggestionlist'?: string[];
   }
   interface HubProximityMap {
     'center'?: string;

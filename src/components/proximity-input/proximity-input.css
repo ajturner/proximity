@@ -59,3 +59,33 @@ input[type=submit]:hover {
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+.suggestions-div {
+  position: relative;
+}
+
+.suggestions-input {
+  width: 100%;
+}
+
+.suggestions-ul {
+  list-style: none;
+  border: 1px lightblue solid;
+  background-color: white;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 80%;
+  z-index: 100;
+}
+
+.suggestions-li:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.suggestions-selected {
+  background-color: blue;
+  color: white;
+}

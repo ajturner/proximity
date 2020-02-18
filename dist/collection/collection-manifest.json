@@ -1,9 +1,9 @@
 {
   "entries": [
     "components/proximity-input/proximity-input.js",
+    "components/hub-radar/hub-radar.js",
     "components/topic/topic.js",
-    "components/proximity-map/proximity-map.js",
-    "components/hub-radar/hub-radar.js"
+    "components/proximity-map/proximity-map.js"
   ],
   "compiler": {
     "name": "@stencil/core",
