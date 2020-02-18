@@ -1,12 +1,40 @@
 import { queryFeatures, IQueryFeaturesOptions} from '@esri/arcgis-rest-feature-layer';
-import { getItemData } from "@esri/arcgis-rest-portal";
-import { geocode } from '@esri/arcgis-rest-geocoding';
+import { getItem, getItemData } from "@esri/arcgis-rest-portal";
+import { geocode, suggest, IGeocodeOptions } from '@esri/arcgis-rest-geocoding';
 
-export function getLocation(address: any) {
+export function suggestLocations(address: any, extent?: [Number[], Number[]]) {
     return new Promise((resolve, reject) => {
-        geocode(address)
+        let geocodeOptions:IGeocodeOptions = {
+            address: address,
+        }
+        if(extent !== undefined && extent !== null) {
+            const searchExtent = [...extent[0], ...extent[1]].join(',');
+            geocodeOptions = Object.assign(geocodeOptions, {"params": {searchExtent}});
+        }
+
+        suggest(address, geocodeOptions).then((suggestions) => {
+            console.log("suggestLocations", suggestions);
+            resolve(suggestions);
+        }).catch(reject)
+    })
+}
+
+export function getLocation(address: any, extent?: [Number[], Number[]]) {
+    return new Promise((resolve, reject) => {
+        console.log("getLocation extent", extent)
+
+        let geocodeOptions:IGeocodeOptions = {
+            address: address,
+        }
+        if(extent !== undefined && extent !== null) {
+            const searchExtent = [...extent[0], ...extent[1]].join(',');
+            geocodeOptions = Object.assign(geocodeOptions, {"params": {searchExtent}});
+        }
+        console.log("getLocation geocodeOptions", geocodeOptions)
+        
+        geocode(geocodeOptions)
         .then((response) => {
-            // console.log("getLocation then", response)
+            console.log("getLocation then", response)
             resolve(response.candidates[0].location); // => { x: -77.036533, y: 38.898719, spatialReference: ... }
         })
         .catch(reject)
@@ -14,38 +42,37 @@ export function getLocation(address: any) {
 
 }
 
-export function getMap(id: string, address?: string, coordinates?: any) {
+export function getMap(id: string) {
     return new Promise((resolve, reject) => {
-        getLocation({
-            address: address,
-            }).then(location => {
-            getItemData(id)
-            .then(response => {
-                // Get Features from each map layer
-                let promises = response['operationalLayers'].reverse().map(layer => {
-                    return getFeatures(layer, location)
-                });
-
-                Promise.all(promises).then(results => {
-                    // console.log("getMap Promise all", results)
-                    let features = []
-                    results.map(r => {
-                        
-                        // There may not have been any features from this layer
-                        if(r['features'].length > 0) {
-                            r['description'] = r['features'][0].title
-                            r['description'] += `<br/><em>${r['features'][0].description}</em>`
-                        }
-                        features.push(r)
-                    })
-                    resolve(features)
-                })
-                
-            })
-            .catch(reject)
-            })
-            .catch(reject)
+        Promise.all([getItem(id), getItemData(id)])
+        .then(resolve)
+        .catch(reject)
     });
+}
+
+export function queryMap(mapItemData: any, coordinates?: any) {
+    return new Promise((resolve, reject) => {
+        // Get Features from each map layer
+        let promises = mapItemData['operationalLayers'].reverse().map(layer => {
+            return getFeatures(layer, coordinates)
+        });
+
+        Promise.all(promises).then(results => {
+            // console.log("getMap Promise all", results)
+            let features = []
+            results.map(r => {
+                
+                // There may not have been any features from this layer
+                if(r['features'].length > 0) {
+                    r['description'] = r['features'][0].title
+                    r['description'] += `<br/><em>${r['features'][0].description}</em>`
+                }
+                features.push(r)
+            })
+            resolve(features)
+        }).catch(reject)
+    })
+            
 }
 function getFeatures(layer: any, location) {
     // console.log("getFeatures", layer, location)

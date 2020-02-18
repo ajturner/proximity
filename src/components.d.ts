@@ -12,6 +12,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 export namespace Components {
   interface HubProximityInput {
     'address': string;
+    'extent': any;
   }
   interface HubProximityMap {
     'center': string;
@@ -20,6 +21,12 @@ export namespace Components {
   }
   interface HubRadar {
     'address': string;
+    'mapCenter': string;
+    'mapItem': any;
+    'mapItemData': any;
+    'mapZoom': string;
+    'messages': any;
+    'showMap': boolean;
     'webmap': string;
   }
   interface HubTopic {
@@ -65,6 +72,7 @@ declare global {
 declare namespace LocalJSX {
   interface HubProximityInput {
     'address'?: string;
+    'extent'?: any;
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
   }
   interface HubProximityMap {
@@ -74,6 +82,12 @@ declare namespace LocalJSX {
   }
   interface HubRadar {
     'address'?: string;
+    'mapCenter'?: string;
+    'mapItem'?: any;
+    'mapItemData'?: any;
+    'mapZoom'?: string;
+    'messages'?: any;
+    'showMap'?: boolean;
     'webmap'?: string;
   }
   interface HubTopic {

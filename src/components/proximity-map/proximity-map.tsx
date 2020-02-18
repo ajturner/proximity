@@ -8,26 +8,30 @@ import { loadCss, loadModules } from "esri-loader";
 })
 export class ProximityMap {
   @Element() hostElement: HTMLElement;
+  
   @Prop() webmap: string;
-  @Prop({ mutable: true, reflect: true }) center: string = "[-77,38.9]";
-  @Prop({ mutable: true, reflect: true }) zoom: string = "4";
-  @State() mapCenter: [number, number] = [-77, 38.9];
+  @Prop({ mutable: true, reflect: true }) center: string;
+  @Prop({ mutable: true, reflect: true }) zoom: string;
+  
+  @State() mapCenter: [number, number] = [-107, 38.9];
   @State() mapZoom: number = 4;
   
   @Watch('center')
   centerDidChangeHandler(newCenter: string) {
-    if(newCenter) {
+    console.log("map: centerDidChangeHandler 1", [newCenter, this.esriMapView])
+    if(newCenter && this.esriMapView) {
       this.mapCenter = JSON.parse(newCenter);
-      console.log("centerDidChangeHandler", [this.mapCenter, this.mapZoom])
+      console.log("map: centerDidChangeHandler 2", [this.mapCenter, this.mapZoom])
       this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }
   
   @Watch('zoom')
   zoomDidChangeHandler(newZoom: string) {
-    if(newZoom) {
+    console.log("map: zoomDidChangeHandler 1", [newZoom, this.esriMapView])
+    if(newZoom && this.esriMapView) {
      this.mapZoom = JSON.parse(newZoom);  
-     console.log("zoomDidChangeHandler", [this.mapCenter, this.mapZoom])
+     console.log("map: zoomDidChangeHandler 2", [this.mapCenter, this.mapZoom])
      this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }  

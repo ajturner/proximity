@@ -1,7 +1,7 @@
 import { Component, State, h, Prop, Listen} from '@stencil/core';
 // import { format } from '../../utils/utils';
 
-import { getMap, getLocation } from '../../utils/sonar-blip'
+import { getMap, queryMap } from '../../utils/sonar-blip'
 
 @Component({
   tag: 'hub-radar',
@@ -11,53 +11,67 @@ import { getMap, getLocation } from '../../utils/sonar-blip'
 export class HubRadar {
   textInput: HTMLInputElement;
 
-  @State() messages: any;
+  @Prop() mapItem: any; //PortalItem
+  @Prop() mapItemData: any; //PortalItem
+  @Prop() mapCenter: string;
+  @Prop() mapZoom: string;
+  @Prop() messages: any;
+
   @Prop({ mutable: true }) address: string;
   @Prop() webmap: string;
+  @Prop() showMap: boolean = true;
 
-  @State() mapCenter: string = "[-80, 40]";
-  @State() mapZoom: string = "4";
+  @State() isLoading: boolean = false;
+
 
   @Listen('eventAddressUpdated')
   handleAddressUpdated(event: CustomEvent) {
     event.preventDefault();
     console.log("radar handleUpdateAddress", event.detail)
-    this.address = event.detail;
-    getLocation(this.address).then(coordinates => {
-      this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
-      this.mapZoom = "16";
-      
-      getMap(this.webmap, this.address, coordinates).then(results => {
-        this.messages = results;
-      });
-    })
-    
-  }
-  componentWillLoad() {
-    getMap(this.webmap, this.address).then(results => {
+    this.address = event.detail.address;
+    let coordinates = event.detail.coordinates;
+
+    this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
+    this.mapZoom = "16";
+
+    this.isLoading = true;
+    queryMap(this.mapItemData, coordinates).then(results => {
       this.messages = results;
+      this.isLoading = false;
+    });
+  }
+  
+  componentWillLoad() {
+    getMap(this.webmap).then(([mapItem, mapItemData]) => {
+      this.mapItem = mapItem;
+      this.mapItemData = mapItemData;
     });
   }
 
 
   render() {
     let output = []
-
     // Get Address
-    output.push(<hub-proximity-input address={this.address}></hub-proximity-input>)
-    output.push(<em>Searching '{this.address}'</em>)
+    let inputProps = {
+      address: this.address,
+      extent: this.mapItem ? this.mapItem.extent : null,
+    };
+    output.push(<hub-proximity-input {...inputProps}></hub-proximity-input>)
 
-    output.push(<hub-proximity-map class="proximity-map" center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-proximity-map>)
-    // output.push(<hub-proximity-map center="[-118, 42]" zoom="4"></hub-proximity-map> )
-    // Get Results
-    if(this.messages === undefined || this.messages.length == 0) {
+    if(this.showMap) {
+      output.push(<hub-proximity-map class="proximity-map" center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-proximity-map>)
+    }
+    if(this.isLoading) {
       output.push(<calcite-loader text="Fetching data..." is-active></calcite-loader>)
-    } else {
-      this.messages.forEach(m => {
-        output.push(
-          <hub-topic name={m.title} description={m.description}></hub-topic>
-        )
-      })
+    } else {  
+      // Get Results
+      if(this.messages !== undefined && this.messages.length > 0) {
+        this.messages.forEach(m => {
+          output.push(
+            <hub-topic name={m.title} description={m.description}></hub-topic>
+          )
+        })
+      }
     }
 
     return output    

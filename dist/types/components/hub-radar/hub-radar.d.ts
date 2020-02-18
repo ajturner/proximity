@@ -1,10 +1,14 @@
 export declare class HubRadar {
     textInput: HTMLInputElement;
+    mapItem: any;
+    mapItemData: any;
+    mapCenter: string;
+    mapZoom: string;
     messages: any;
     address: string;
     webmap: string;
-    mapCenter: string;
-    mapZoom: string;
+    showMap: boolean;
+    isLoading: boolean;
     handleAddressUpdated(event: CustomEvent): void;
     componentWillLoad(): void;
     render(): any[];
