@@ -1,4 +1,4 @@
-import { h } from "@stencil/core";
+import { Host, h } from "@stencil/core";
 // import { format } from '../../utils/utils';
 import { getMap, queryMap } from '../../utils/proximity-utils';
 export class HubRadar {
@@ -46,10 +46,12 @@ export class HubRadar {
                 this.messages.forEach(m => {
                     output.push(h("hub-topic", { name: m.title, description: m.description }));
                 });
-                output.push(h("slot", { name: "after-results" }));
+                // output.push( <slot name="after-results" /> )
             }
         }
-        return output;
+        return (h(Host, null,
+            output,
+            h("slot", { name: "after-results" })));
     }
     static get is() { return "hub-radar"; }
     static get originalStyleUrls() { return {

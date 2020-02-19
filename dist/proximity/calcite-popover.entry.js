@@ -2,7 +2,7 @@ import { h, r as registerInstance, c as createEvent, H as Host, d as getElement 
 import './dom-8fd67d72.js';
 import { g as guid } from './guid-3f4b9e31.js';
 import { a as x16 } from './index-ca737843.js';
-import { P as Popper, g as getPlacement } from './popper-adb7473d.js';
+import { P as Popper, g as getPlacement } from './popper-9093772a.js';
 
 const CSS = {
     container: "container",

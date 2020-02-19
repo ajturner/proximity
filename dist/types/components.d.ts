@@ -10,6 +10,10 @@ import { HTMLStencilElement, JSXBase } from './stencil.core';
 
 
 export namespace Components {
+  interface HubContentCard {
+    'contentId': string;
+    'layout': string;
+  }
   interface HubProximityInput {
     /**
     * Default address to search
@@ -48,13 +52,23 @@ export namespace Components {
     'webmap': string;
   }
   interface HubTopic {
+    'content': any;
     'description': string;
+    'image': string;
+    'layout': string;
     'name': string;
+    'type': string;
   }
 }
 
 declare global {
 
+
+  interface HTMLHubContentCardElement extends Components.HubContentCard, HTMLStencilElement {}
+  var HTMLHubContentCardElement: {
+    prototype: HTMLHubContentCardElement;
+    new (): HTMLHubContentCardElement;
+  };
 
   interface HTMLHubProximityInputElement extends Components.HubProximityInput, HTMLStencilElement {}
   var HTMLHubProximityInputElement: {
@@ -80,6 +94,7 @@ declare global {
     new (): HTMLHubTopicElement;
   };
   interface HTMLElementTagNameMap {
+    'hub-content-card': HTMLHubContentCardElement;
     'hub-proximity-input': HTMLHubProximityInputElement;
     'hub-proximity-map': HTMLHubProximityMapElement;
     'hub-radar': HTMLHubRadarElement;
@@ -88,6 +103,10 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface HubContentCard {
+    'contentId'?: string;
+    'layout'?: string;
+  }
   interface HubProximityInput {
     /**
     * Default address to search
@@ -130,11 +149,16 @@ declare namespace LocalJSX {
     'webmap'?: string;
   }
   interface HubTopic {
+    'content'?: any;
     'description'?: string;
+    'image'?: string;
+    'layout'?: string;
     'name'?: string;
+    'type'?: string;
   }
 
   interface IntrinsicElements {
+    'hub-content-card': HubContentCard;
     'hub-proximity-input': HubProximityInput;
     'hub-proximity-map': HubProximityMap;
     'hub-radar': HubRadar;
@@ -148,6 +172,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
       'hub-proximity-input': LocalJSX.HubProximityInput & JSXBase.HTMLAttributes<HTMLHubProximityInputElement>;
       'hub-proximity-map': LocalJSX.HubProximityMap & JSXBase.HTMLAttributes<HTMLHubProximityMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;

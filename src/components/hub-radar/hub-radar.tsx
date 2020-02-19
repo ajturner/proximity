@@ -1,4 +1,4 @@
-import { Component, State, h, Prop, Listen} from '@stencil/core';
+import { Component, Host, State, h, Prop, Listen} from '@stencil/core';
 // import { format } from '../../utils/utils';
 
 import { getMap, queryMap } from '../../utils/proximity-utils'
@@ -72,10 +72,16 @@ export class HubRadar {
             <hub-topic name={m.title} description={m.description}></hub-topic>
           )
         })
-        output.push( <slot name="after-results" /> )
+        // output.push( <slot name="after-results" /> )
+        
       }
     }
 
-    return output    
+    return ( 
+      <Host>
+        {output}
+        <slot name="after-results" />
+      </Host>
+    )
   }
 }

@@ -11,5 +11,5 @@ export declare class HubRadar {
     isLoading: boolean;
     handleAddressUpdated(event: CustomEvent): void;
     componentWillLoad(): void;
-    render(): any[];
+    render(): any;
 }

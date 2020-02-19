@@ -2,6 +2,10 @@ import { queryFeatures, IQueryFeaturesOptions} from '@esri/arcgis-rest-feature-l
 import { getItem, getItemData } from "@esri/arcgis-rest-portal";
 import { geocode, suggest, IGeocodeOptions, ISuggestResponse } from '@esri/arcgis-rest-geocoding';
 
+export function timestampToDate(timestamp) {
+    var date = new Date(timestamp); 
+    return date.getFullYear();
+}
 export function suggestLocations(address: any, extent?: [Number[], Number[]]): Promise<ISuggestResponse> {
     return new Promise((resolve, reject) => {
         let geocodeOptions:IGeocodeOptions = {

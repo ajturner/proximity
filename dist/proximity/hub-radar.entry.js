@@ -1,5 +1,6 @@
-import { r as registerInstance, h } from './core-18271712.js';
-import { q as queryMap, g as getMap } from './proximity-utils-c9223bb6.js';
+import { r as registerInstance, h, H as Host } from './core-18271712.js';
+import './index-2057f5a2.js';
+import { q as queryMap, g as getMap } from './proximity-utils-dac6fe93.js';
 
 const HubRadar = class {
     constructor(hostRef) {
@@ -47,10 +48,10 @@ const HubRadar = class {
                 this.messages.forEach(m => {
                     output.push(h("hub-topic", { name: m.title, description: m.description }));
                 });
-                output.push(h("slot", { name: "after-results" }));
+                // output.push( <slot name="after-results" /> )
             }
         }
-        return output;
+        return (h(Host, null, output, h("slot", { name: "after-results" })));
     }
     static get style() { return ".proximity-map {\n    height: 200px;\n}"; }
 };
