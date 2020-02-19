@@ -44,7 +44,7 @@ export class HubRadar {
             if (this.messages !== undefined && this.messages.length > 0) {
                 output.push(h("slot", { name: "before-results" }));
                 this.messages.forEach(m => {
-                    output.push(h("hub-topic", { name: m.title, description: m.description }));
+                    output.push(h("hub-topic", { type: m.title, name: m.description }));
                 });
                 // output.push( <slot name="after-results" /> )
             }

@@ -1,6 +1,6 @@
 import { r as registerInstance, h, H as Host } from './core-18271712.js';
 import './index-2057f5a2.js';
-import { q as queryMap, g as getMap } from './proximity-utils-dac6fe93.js';
+import { q as queryMap, g as getMap } from './proximity-utils-20c3b3da.js';
 
 const HubRadar = class {
     constructor(hostRef) {
@@ -46,7 +46,7 @@ const HubRadar = class {
             if (this.messages !== undefined && this.messages.length > 0) {
                 output.push(h("slot", { name: "before-results" }));
                 this.messages.forEach(m => {
-                    output.push(h("hub-topic", { name: m.title, description: m.description }));
+                    output.push(h("hub-topic", { type: m.title, name: m.description }));
                 });
                 // output.push( <slot name="after-results" /> )
             }

@@ -27,10 +27,11 @@ export class ContentCard {
         <hub-topic 
           content-type="initiative" 
           layout={this.layout}
+          url={this.content.item.url}
           image={this.content.item.thumbnail} 
           name={this.content.item.title} 
           description={this.content.item.snippet}
-          content={this.content}
+          // content={this.content}
         ></hub-topic>
       </Host>
     );

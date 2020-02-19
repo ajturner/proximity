@@ -51,13 +51,14 @@ export namespace Components {
     'showMap': boolean;
     'webmap': string;
   }
+  interface HubSearch {}
   interface HubTopic {
-    'content': any;
     'description': string;
     'image': string;
     'layout': string;
     'name': string;
     'type': string;
+    'url': string;
   }
 }
 
@@ -88,6 +89,12 @@ declare global {
     new (): HTMLHubRadarElement;
   };
 
+  interface HTMLHubSearchElement extends Components.HubSearch, HTMLStencilElement {}
+  var HTMLHubSearchElement: {
+    prototype: HTMLHubSearchElement;
+    new (): HTMLHubSearchElement;
+  };
+
   interface HTMLHubTopicElement extends Components.HubTopic, HTMLStencilElement {}
   var HTMLHubTopicElement: {
     prototype: HTMLHubTopicElement;
@@ -98,6 +105,7 @@ declare global {
     'hub-proximity-input': HTMLHubProximityInputElement;
     'hub-proximity-map': HTMLHubProximityMapElement;
     'hub-radar': HTMLHubRadarElement;
+    'hub-search': HTMLHubSearchElement;
     'hub-topic': HTMLHubTopicElement;
   }
 }
@@ -148,13 +156,14 @@ declare namespace LocalJSX {
     'showMap'?: boolean;
     'webmap'?: string;
   }
+  interface HubSearch {}
   interface HubTopic {
-    'content'?: any;
     'description'?: string;
     'image'?: string;
     'layout'?: string;
     'name'?: string;
     'type'?: string;
+    'url'?: string;
   }
 
   interface IntrinsicElements {
@@ -162,6 +171,7 @@ declare namespace LocalJSX {
     'hub-proximity-input': HubProximityInput;
     'hub-proximity-map': HubProximityMap;
     'hub-radar': HubRadar;
+    'hub-search': HubSearch;
     'hub-topic': HubTopic;
   }
 }
@@ -176,6 +186,7 @@ declare module "@stencil/core" {
       'hub-proximity-input': LocalJSX.HubProximityInput & JSXBase.HTMLAttributes<HTMLHubProximityInputElement>;
       'hub-proximity-map': LocalJSX.HubProximityMap & JSXBase.HTMLAttributes<HTMLHubProximityMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
+      'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
       'hub-topic': LocalJSX.HubTopic & JSXBase.HTMLAttributes<HTMLHubTopicElement>;
     }
   }

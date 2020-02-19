@@ -69,7 +69,7 @@ export class HubRadar {
         output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
           output.push(
-            <hub-topic name={m.title} description={m.description}></hub-topic>
+            <hub-topic type={m.title} name={m.description}></hub-topic>
           )
         })
         // output.push( <slot name="after-results" /> )
