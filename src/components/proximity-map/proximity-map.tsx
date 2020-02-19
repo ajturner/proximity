@@ -48,7 +48,7 @@ export class ProximityMap {
    */
   esriMap: __esri.Map;
   esriMapView: __esri.MapView;
-  municipalitiesFeatureLayer: __esri.FeatureLayer;
+  // municipalitiesFeatureLayer: __esri.FeatureLayer;
 
   constructor() {
     this.webmap = this.webmap ? this.webmap : "41281c51f9de45edaf1c8ed44bb10e30"
@@ -56,12 +56,11 @@ export class ProximityMap {
     loadCss(`${this.esriMapOptions.url}/esri/css/main.css`);
 
     loadModules(
-      ["esri/Map", "esri/layers/FeatureLayer"],
+      ["esri/Map"],
       this.esriMapOptions
     ).then(
-      ([EsriMap, FeatureLayer]: [
-        __esri.MapConstructor,
-        __esri.FeatureLayerConstructor
+      ([EsriMap]: [
+        __esri.MapConstructor
       ]) => {
         this.esriMap = new EsriMap({
           basemap: "streets"
@@ -81,7 +80,7 @@ export class ProximityMap {
 
   componentDidUpdate() {
     console.log("component update");
-    this.zoomToUrlObjectId(600);
+    // this.zoomToUrlObjectId(600);
   }
 
   /**
@@ -127,7 +126,7 @@ export class ProximityMap {
   /**
    * Zooms to objectid passed in url map/{objectid}
    */
-  zoomToUrlObjectId(duration = 1600) {
+  // zoomToUrlObjectId(duration = 1600) {
     // if (this.match && this.match.params && this.match.params.objectid) {
     //   this.municipalitiesFeatureLayer
     //     .queryFeatures({
@@ -142,7 +141,7 @@ export class ProximityMap {
     //       }
     //     });
     // }
-  }
+  // }
 
   zoomToAndHighlighFeature(feature: __esri.Graphic, duration = 1600) {
     this.esriMapView.when(() => {
@@ -169,25 +168,25 @@ export class ProximityMap {
     });
   }
 
-  addZoomOnClickAndUrlUpdate() {
-    this.esriMapView.on("click", evt => {
-      this.esriMapView
-        .whenLayerView(this.municipalitiesFeatureLayer)
-        .then((lyrView: __esri.FeatureLayerView) => {
-          lyrView.queryFeatures().then(results => {
-            results.features.some(f => {
-              const polygon = f.geometry as __esri.Polygon;
-              if (polygon.contains(evt.mapPoint)) {
-                // this.history.push(`/map/${f.attributes.ObjectId}`, {});
-                this.zoomToAndHighlighFeature(f, 500);
-                return true;
-              }
-              return false;
-            });
-          });
-        });
-    });
-  }
+  // addZoomOnClickAndUrlUpdate() {
+  //   this.esriMapView.on("click", evt => {
+  //     this.esriMapView
+  //       .whenLayerView(this.municipalitiesFeatureLayer)
+  //       .then((lyrView: __esri.FeatureLayerView) => {
+  //         lyrView.queryFeatures().then(results => {
+  //           results.features.some(f => {
+  //             const polygon = f.geometry as __esri.Polygon;
+  //             if (polygon.contains(evt.mapPoint)) {
+  //               // this.history.push(`/map/${f.attributes.ObjectId}`, {});
+  //               this.zoomToAndHighlighFeature(f, 500);
+  //               return true;
+  //             }
+  //             return false;
+  //           });
+  //         });
+  //       });
+  //   });
+  // }
 
   render() {
     return <div class="proximity-map" />;

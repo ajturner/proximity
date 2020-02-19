@@ -1,4 +1,4 @@
-import { Element, Watch, Listen, Component, Prop, State, Event, EventEmitter, h } from '@stencil/core';
+import { Element, Listen, Component, Prop, State, Event, EventEmitter, h } from '@stencil/core';
 import { getLocation, suggestLocations } from '../../utils/proximity-utils'
 
 @Component({
@@ -38,7 +38,7 @@ export class ProximityInput {
     this.inputAddress = this.address;
   }
 
-  @Listen('window:click') 
+  @Listen('click', { target: 'window' })
   handleWindowClick(e: Event) {
     if (!this.element.contains((e.target as HTMLElement))) {
       this.showSuggestions = false;
@@ -142,6 +142,7 @@ export class ProximityInput {
     return (
       <div class='suggestions-div'>
         <form id='annotation-form' onSubmit={(e) => this.onSubmit(e)}>
+          <slot name="before-input" />
           <input
             class='suggestions-input'
             type='text'

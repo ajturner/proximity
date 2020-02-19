@@ -52,7 +52,6 @@ function queryShadowRoot(root, skipNode, isMatch, maxDepth = 20, depth = 0) {
     }
     return matches;
 }
-//# sourceMappingURL=shadow.js.map
 
 /**
  * Returns whether the element is hidden.
@@ -102,7 +101,6 @@ function isFocusable($elem) {
         // IFrames
         || $elem instanceof HTMLIFrameElement);
 }
-//# sourceMappingURL=focusable.js.map
 
 let timeouts = new Map();
 /**
@@ -123,7 +121,6 @@ function debounce(cb, ms, id) {
         timeouts.delete(id);
     }, ms));
 }
-//# sourceMappingURL=debounce.js.map
 
 /**
  * Template for the focus trap.
@@ -294,9 +291,6 @@ class FocusTrap extends HTMLElement {
 if (window && window.customElements) {
     window.customElements.define("focus-trap", FocusTrap);
 }
-//# sourceMappingURL=focus-trap.js.map
-
-//# sourceMappingURL=index.js.map
 
 const CalciteModal = class {
     constructor(hostRef) {

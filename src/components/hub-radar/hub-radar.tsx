@@ -66,11 +66,13 @@ export class HubRadar {
     } else {  
       // Get Results
       if(this.messages !== undefined && this.messages.length > 0) {
+        output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
           output.push(
             <hub-topic name={m.title} description={m.description}></hub-topic>
           )
         })
+        output.push( <slot name="after-results" /> )
       }
     }
 

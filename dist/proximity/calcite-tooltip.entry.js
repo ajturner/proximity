@@ -1,7 +1,7 @@
 import { r as registerInstance, h, H as Host, d as getElement } from './core-18271712.js';
 import './dom-8fd67d72.js';
 import { g as guid } from './guid-3f4b9e31.js';
-import { P as Popper, g as getPlacement } from './popper-9093772a.js';
+import { P as Popper, g as getPlacement } from './popper-adb7473d.js';
 
 const CSS = {
     container: "tooltip-container",
