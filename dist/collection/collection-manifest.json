@@ -1,11 +1,11 @@
 {
   "entries": [
-    "components/proximity-input/proximity-input.js",
     "components/content-card/content-card.js",
     "components/topic/topic.js",
-    "components/search/search.js",
-    "components/proximity-map/proximity-map.js",
     "components/hub-radar/hub-radar.js",
+    "components/search/search.js",
+    "components/proximity-input/proximity-input.js",
+    "components/proximity-map/proximity-map.js",
     "components/suggest-input/suggest-input.js"
   ],
   "compiler": {

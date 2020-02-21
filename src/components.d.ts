@@ -66,12 +66,12 @@ export namespace Components {
     'suggestions': Array<string>;
   }
   interface HubTopic {
+    'contenttype': string;
     'description': string;
     'image': string;
     'item': string;
     'layout': string;
     'name': string;
-    'type': string;
     'url': string;
   }
 }
@@ -195,12 +195,12 @@ declare namespace LocalJSX {
     'suggestions'?: Array<string>;
   }
   interface HubTopic {
+    'contenttype'?: string;
     'description'?: string;
     'image'?: string;
     'item'?: string;
     'layout'?: string;
     'name'?: string;
-    'type'?: string;
     'url'?: string;
   }
 

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
 import { getItem, IItem } from "@esri/arcgis-rest-portal";
 
 @Component({
@@ -22,19 +22,25 @@ export class ContentCard {
   }
 
   render() {
-    console.log("content layout", this.layout)
-    return (
-      <Host>
+    let output = [];
+
+    if(this.contentItem) {
+      output.push( 
         <hub-topic 
           item={this.content}
-          content-type={this.contentItem.type}
+          contenttype={this.contentItem.type}
           layout={this.layout}
           url={this.contentItem.url}
           image={this.contentItem.thumbnail} 
           name={this.contentItem.title} 
           description={this.contentItem.snippet}
           // content={this.content}
-        ></hub-topic>
+        ></hub-topic> 
+      )
+    }
+    return (
+      <Host>
+        {output}
       </Host>
     );
   }

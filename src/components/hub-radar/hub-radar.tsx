@@ -1,7 +1,5 @@
 import { Component, Host, State, h, Prop, Listen} from '@stencil/core';
-// import { format } from '../../utils/utils';
-
-import { getMap, queryMap } from '../../utils/proximity-utils'
+import { getLocation, getMap, queryMap } from '../../utils/proximity-utils'
 
 @Component({
   tag: 'hub-radar',
@@ -25,10 +23,11 @@ export class HubRadar {
 
   @Listen('eventAddressUpdated')
   handleAddressUpdated(event: CustomEvent) {
-    event.preventDefault();
-    console.log("radar handleUpdateAddress", event.detail)
-    this.address = event.detail.address;
-    let coordinates = event.detail.coordinates;
+    this.updateRadar(event.detail.address, event.detail.coordinates);
+  }
+  
+  updateRadar(address:string, coordinates: any) {
+    this.address = address;
 
     this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
     this.mapZoom = "16";
@@ -37,14 +36,25 @@ export class HubRadar {
     queryMap(this.mapItemData, coordinates).then(results => {
       this.messages = results;
       this.isLoading = false;
-    });
+    });    
   }
-  
+
   componentWillLoad() {
     getMap(this.webmap).then(([mapItem, mapItemData]) => {
       this.mapItem = mapItem;
       this.mapItemData = mapItemData;
+
+      // The component embedded an address, so load the radar.
+      if(this.address) {
+        getLocation(this.address, mapItem.extent).then(coordinates => {
+          this.updateRadar(this.address, coordinates);
+        }).catch(error => {
+          console.log('Geocode error', error)
+        });
+      }      
     });
+
+
   }
 
 
@@ -61,18 +71,17 @@ export class HubRadar {
       output.push(<hub-proximity-map class="proximity-map" center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-proximity-map>)
     }
     if(this.isLoading) {
-      output.push(<calcite-loader text="Fetching data..." is-active></calcite-loader>)
+      output.push(<calcite-loader text="Scanning radar..." is-active></calcite-loader>)
     } else {  
       // Get Results
       if(this.messages !== undefined && this.messages.length > 0) {
         output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
           output.push(
-            <hub-topic type={m.title} name={m.description}></hub-topic>
+            <hub-topic contenttype={m.title} name={m.description ? m.description : "<em>None</em>"}></hub-topic>
           )
         })
-        // output.push( <slot name="after-results" /> )
-        
+        // output.push( <slot name="after-results" /> )        
       }
     }
 

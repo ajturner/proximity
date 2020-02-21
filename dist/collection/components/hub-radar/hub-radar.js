@@ -1,16 +1,15 @@
 import { Host, h } from "@stencil/core";
-// import { format } from '../../utils/utils';
-import { getMap, queryMap } from '../../utils/proximity-utils';
+import { getLocation, getMap, queryMap } from '../../utils/proximity-utils';
 export class HubRadar {
     constructor() {
         this.showMap = true;
         this.isLoading = false;
     }
     handleAddressUpdated(event) {
-        event.preventDefault();
-        console.log("radar handleUpdateAddress", event.detail);
-        this.address = event.detail.address;
-        let coordinates = event.detail.coordinates;
+        this.updateRadar(event.detail.address, event.detail.coordinates);
+    }
+    updateRadar(address, coordinates) {
+        this.address = address;
         this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
         this.mapZoom = "16";
         this.isLoading = true;
@@ -23,6 +22,14 @@ export class HubRadar {
         getMap(this.webmap).then(([mapItem, mapItemData]) => {
             this.mapItem = mapItem;
             this.mapItemData = mapItemData;
+            // The component embedded an address, so load the radar.
+            if (this.address) {
+                getLocation(this.address, mapItem.extent).then(coordinates => {
+                    this.updateRadar(this.address, coordinates);
+                }).catch(error => {
+                    console.log('Geocode error', error);
+                });
+            }
         });
     }
     render() {
@@ -37,16 +44,16 @@ export class HubRadar {
             output.push(h("hub-proximity-map", { class: "proximity-map", center: this.mapCenter, zoom: this.mapZoom, webmap: this.webmap }));
         }
         if (this.isLoading) {
-            output.push(h("calcite-loader", { text: "Fetching data...", "is-active": true }));
+            output.push(h("calcite-loader", { text: "Scanning radar...", "is-active": true }));
         }
         else {
             // Get Results
             if (this.messages !== undefined && this.messages.length > 0) {
                 output.push(h("slot", { name: "before-results" }));
                 this.messages.forEach(m => {
-                    output.push(h("hub-topic", { type: m.title, name: m.description }));
+                    output.push(h("hub-topic", { contenttype: m.title, name: m.description ? m.description : "<em>None</em>" }));
                 });
-                // output.push( <slot name="after-results" /> )
+                // output.push( <slot name="after-results" /> )        
             }
         }
         return (h(Host, null,

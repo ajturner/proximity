@@ -10,6 +10,7 @@ export declare class HubRadar {
     showMap: boolean;
     isLoading: boolean;
     handleAddressUpdated(event: CustomEvent): void;
+    updateRadar(address: string, coordinates: any): void;
     componentWillLoad(): void;
     render(): any;
 }

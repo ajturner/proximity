@@ -17,13 +17,12 @@ export class Search {
     this.queryInput = event.detail;
 
     // this.fetchResults(this.queryInput)
-    console.log("Search", this.results)
     return 'true';
   }
   @Listen("querySelect")
   querySelectHandler(event: CustomEvent): string {
     this.queryInput = event.detail;
-
+    this.results = [];
     this.fetchResults(this.queryInput).then(r => {
       console.log("Search", r)
       this.results = r.data;
@@ -33,7 +32,7 @@ export class Search {
   }  
 
   componentWillLoad() {
-    this.suggestions = ["Water","Wind"]
+
   }
   fetchResults(query: string) {
     return agoSearch({q: query});
@@ -43,12 +42,11 @@ export class Search {
     let output = []
     output.push(
       <hub-suggest-input 
-        placeholder="Search terms"
+        placeholder="Search for content"
         suggestions={this.suggestions}
       ></hub-suggest-input>
     )
     this.results.map(result => {
-      console.log("result", result)
       output.push(<hub-content-card layout="horizontal" content={result['id']}></hub-content-card>)
     })
 

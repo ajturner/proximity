@@ -1,7 +1,6 @@
 import { Component, Host, Prop, h, State } from '@stencil/core';
 import '@esri/calcite-components';
 import '@esri/calcite-ui-icons';
-import { timestampToDate } from '../../utils/proximity-utils';
 
 type ContentMetadata = {
   name: string,
@@ -22,7 +21,7 @@ export class Topic {
   @Prop() image: string;
   @Prop() name: string;
   @Prop() description: string;
-  @Prop({ attribute: 'content-type' }) type: string;
+  @Prop() contenttype: string;
   @Prop() layout:string = 'horizontal'
   @Prop() url:string;
   
@@ -31,7 +30,6 @@ export class Topic {
   @State() metadata: Array<ContentMetadata> = []; 
 
   componentWillRender() {
-    console.log("RENDERING!!!", this.item)
     // this.metadata = [
     //   {name: "Owner", value: this.content.item.owner},
     //   {name: "Updated", value: timestampToDate(this.content.item.modified)},
@@ -39,7 +37,6 @@ export class Topic {
   }
 
   render() {
-    console.log("topic url", this.url)
     let output = [];
     let thumbnail = null;
     let details = null;
@@ -49,8 +46,8 @@ export class Topic {
       
       thumbnail = <img class="content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
     }
-    if(this.type) {
-      output.push( <span class="content-type">{this.type}</span> )
+    if(this.contenttype) {
+      output.push( <span class="content-type">{this.contenttype}</span> )
     }
     if(this.name) {
       output.push(<div class="content-title"innerHTML={this.name}></div>)

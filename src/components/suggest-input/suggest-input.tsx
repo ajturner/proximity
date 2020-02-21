@@ -34,7 +34,6 @@ export class SuggestInput {
   @State() selectedSuggestionIndex: number;
   
   componentWillLoad() {
-    console.log("suggest load", this.suggestions)
     this.inputQuery = this.query;
   }
 
