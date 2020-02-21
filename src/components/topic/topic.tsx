@@ -17,7 +17,8 @@ type ContentMetadata = {
 
 export class Topic {
 
-  portalUrl: string = "http://dcdev.maps.arcgis.com/sharing/rest/"
+  portalUrl: string = "http://www.arcgis.com/sharing/rest/"
+  @Prop({ attribute: 'item' }) item: string;
   @Prop() image: string;
   @Prop() name: string;
   @Prop() description: string;
@@ -30,7 +31,7 @@ export class Topic {
   @State() metadata: Array<ContentMetadata> = []; 
 
   componentWillRender() {
-    
+    console.log("RENDERING!!!", this.item)
     // this.metadata = [
     //   {name: "Owner", value: this.content.item.owner},
     //   {name: "Updated", value: timestampToDate(this.content.item.modified)},
@@ -44,7 +45,9 @@ export class Topic {
     let details = null;
     
     if(this.image) {
-      thumbnail = <img class="content-image" src={`${this.portalUrl}content/items/4f5c78bfe89a4304aec3a6cfd492d0cd/info/${this.image}`} alt="Thumbnail Image" />
+      console.log("item id", this.item)
+      
+      thumbnail = <img class="content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
     }
     if(this.type) {
       output.push( <span class="content-type">{this.type}</span> )

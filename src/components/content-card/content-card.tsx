@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { getInitiative } from '@esri/hub-initiatives'
-import { IInitiativeModel } from '@esri/hub-common'
+import { getItem, IItem } from "@esri/arcgis-rest-portal";
 
 @Component({
   tag: 'hub-content-card',
@@ -9,15 +8,17 @@ import { IInitiativeModel } from '@esri/hub-common'
 })
 export class ContentCard {
 
-  @Prop({ attribute: 'content' }) contentId: string;
+  @Prop() content:string;
   @Prop() layout:string = "horizontal";
-
-  @State() content: IInitiativeModel; 
+  
+  @Prop({ mutable: true }) contentItem: IItem = null; 
 
   componentWillLoad() {
-    getInitiative(this.contentId).then(initiativeModel => {
-      this.content = initiativeModel;
-    })
+    if(this.contentItem === null) {
+      getItem(this.content).then(item => {
+        this.contentItem = item;
+      })
+    }
   }
 
   render() {
@@ -25,12 +26,13 @@ export class ContentCard {
     return (
       <Host>
         <hub-topic 
-          content-type="initiative" 
+          item={this.content}
+          content-type={this.contentItem.type}
           layout={this.layout}
-          url={this.content.item.url}
-          image={this.content.item.thumbnail} 
-          name={this.content.item.title} 
-          description={this.content.item.snippet}
+          url={this.contentItem.url}
+          image={this.contentItem.thumbnail} 
+          name={this.contentItem.title} 
+          description={this.contentItem.snippet}
           // content={this.content}
         ></hub-topic>
       </Host>

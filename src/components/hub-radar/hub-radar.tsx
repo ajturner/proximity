@@ -23,7 +23,6 @@ export class HubRadar {
 
   @State() isLoading: boolean = false;
 
-
   @Listen('eventAddressUpdated')
   handleAddressUpdated(event: CustomEvent) {
     event.preventDefault();

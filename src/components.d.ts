@@ -7,11 +7,14 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  IItem,
+} from '@esri/arcgis-rest-portal';
 
 export namespace Components {
   interface HubContentCard {
-    'contentId': string;
+    'content': string;
+    'contentItem': IItem;
     'layout': string;
   }
   interface HubProximityInput {
@@ -23,18 +26,6 @@ export namespace Components {
     * Geographic extent limit for geocoding
     */
     'extent': any;
-    /**
-    * Value for input placeholder
-    */
-    'placeholder': string;
-    /**
-    * Value for submit button
-    */
-    'submit': string;
-    /**
-    * Values that the auto-complete textbox should search for
-    */
-    'suggestionlist': string[];
   }
   interface HubProximityMap {
     'center': string;
@@ -52,9 +43,32 @@ export namespace Components {
     'webmap': string;
   }
   interface HubSearch {}
+  interface HubSuggestInput {
+    /**
+    * Geographic extent limit for geocoding
+    */
+    'extent': any;
+    /**
+    * Value for input placeholder
+    */
+    'placeholder': string;
+    /**
+    * Default search
+    */
+    'query': string;
+    /**
+    * Value for submit button
+    */
+    'submit': string;
+    /**
+    * Values that the auto-complete textbox should search for
+    */
+    'suggestions': Array<string>;
+  }
   interface HubTopic {
     'description': string;
     'image': string;
+    'item': string;
     'layout': string;
     'name': string;
     'type': string;
@@ -95,6 +109,12 @@ declare global {
     new (): HTMLHubSearchElement;
   };
 
+  interface HTMLHubSuggestInputElement extends Components.HubSuggestInput, HTMLStencilElement {}
+  var HTMLHubSuggestInputElement: {
+    prototype: HTMLHubSuggestInputElement;
+    new (): HTMLHubSuggestInputElement;
+  };
+
   interface HTMLHubTopicElement extends Components.HubTopic, HTMLStencilElement {}
   var HTMLHubTopicElement: {
     prototype: HTMLHubTopicElement;
@@ -106,13 +126,15 @@ declare global {
     'hub-proximity-map': HTMLHubProximityMapElement;
     'hub-radar': HTMLHubRadarElement;
     'hub-search': HTMLHubSearchElement;
+    'hub-suggest-input': HTMLHubSuggestInputElement;
     'hub-topic': HTMLHubTopicElement;
   }
 }
 
 declare namespace LocalJSX {
   interface HubContentCard {
-    'contentId'?: string;
+    'content'?: string;
+    'contentItem'?: IItem;
     'layout'?: string;
   }
   interface HubProximityInput {
@@ -128,18 +150,6 @@ declare namespace LocalJSX {
     * Emits the {address, coordinates} of the geocoded result
     */
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
-    /**
-    * Value for input placeholder
-    */
-    'placeholder'?: string;
-    /**
-    * Value for submit button
-    */
-    'submit'?: string;
-    /**
-    * Values that the auto-complete textbox should search for
-    */
-    'suggestionlist'?: string[];
   }
   interface HubProximityMap {
     'center'?: string;
@@ -157,9 +167,37 @@ declare namespace LocalJSX {
     'webmap'?: string;
   }
   interface HubSearch {}
+  interface HubSuggestInput {
+    /**
+    * Geographic extent limit for geocoding
+    */
+    'extent'?: any;
+    'onQueryInput'?: (event: CustomEvent<any>) => void;
+    /**
+    * Emits the query of the input result
+    */
+    'onQuerySelect'?: (event: CustomEvent<any>) => void;
+    /**
+    * Value for input placeholder
+    */
+    'placeholder'?: string;
+    /**
+    * Default search
+    */
+    'query'?: string;
+    /**
+    * Value for submit button
+    */
+    'submit'?: string;
+    /**
+    * Values that the auto-complete textbox should search for
+    */
+    'suggestions'?: Array<string>;
+  }
   interface HubTopic {
     'description'?: string;
     'image'?: string;
+    'item'?: string;
     'layout'?: string;
     'name'?: string;
     'type'?: string;
@@ -172,6 +210,7 @@ declare namespace LocalJSX {
     'hub-proximity-map': HubProximityMap;
     'hub-radar': HubRadar;
     'hub-search': HubSearch;
+    'hub-suggest-input': HubSuggestInput;
     'hub-topic': HubTopic;
   }
 }
@@ -187,6 +226,7 @@ declare module "@stencil/core" {
       'hub-proximity-map': LocalJSX.HubProximityMap & JSXBase.HTMLAttributes<HTMLHubProximityMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
+      'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
       'hub-topic': LocalJSX.HubTopic & JSXBase.HTMLAttributes<HTMLHubTopicElement>;
     }
   }

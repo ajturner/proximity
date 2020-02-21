@@ -69,7 +69,7 @@
 }
 .layout-horizontal .content-image {
   display: flex;
-  flex: 0 0 250px;
+  flex: 0 0 150px;
 }
 .layout-horizontal .content-metadata {
   flex: 1 1 auto;
