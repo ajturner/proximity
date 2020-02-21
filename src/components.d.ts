@@ -17,21 +17,6 @@ export namespace Components {
     'contentItem': IItem;
     'layout': string;
   }
-  interface HubProximityInput {
-    /**
-    * Default address to search
-    */
-    'address': string;
-    /**
-    * Geographic extent limit for geocoding
-    */
-    'extent': any;
-  }
-  interface HubProximityMap {
-    'center': string;
-    'webmap': string;
-    'zoom': string;
-  }
   interface HubRadar {
     'address': string;
     'mapCenter': string;
@@ -41,6 +26,21 @@ export namespace Components {
     'messages': any;
     'showMap': boolean;
     'webmap': string;
+  }
+  interface HubRadarInput {
+    /**
+    * Default address to search
+    */
+    'address': string;
+    /**
+    * Geographic extent limit for geocoding
+    */
+    'extent': any;
+  }
+  interface HubRadarMap {
+    'center': string;
+    'webmap': string;
+    'zoom': string;
   }
   interface HubSearch {}
   interface HubSuggestInput {
@@ -85,22 +85,22 @@ declare global {
     new (): HTMLHubContentCardElement;
   };
 
-  interface HTMLHubProximityInputElement extends Components.HubProximityInput, HTMLStencilElement {}
-  var HTMLHubProximityInputElement: {
-    prototype: HTMLHubProximityInputElement;
-    new (): HTMLHubProximityInputElement;
-  };
-
-  interface HTMLHubProximityMapElement extends Components.HubProximityMap, HTMLStencilElement {}
-  var HTMLHubProximityMapElement: {
-    prototype: HTMLHubProximityMapElement;
-    new (): HTMLHubProximityMapElement;
-  };
-
   interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {}
   var HTMLHubRadarElement: {
     prototype: HTMLHubRadarElement;
     new (): HTMLHubRadarElement;
+  };
+
+  interface HTMLHubRadarInputElement extends Components.HubRadarInput, HTMLStencilElement {}
+  var HTMLHubRadarInputElement: {
+    prototype: HTMLHubRadarInputElement;
+    new (): HTMLHubRadarInputElement;
+  };
+
+  interface HTMLHubRadarMapElement extends Components.HubRadarMap, HTMLStencilElement {}
+  var HTMLHubRadarMapElement: {
+    prototype: HTMLHubRadarMapElement;
+    new (): HTMLHubRadarMapElement;
   };
 
   interface HTMLHubSearchElement extends Components.HubSearch, HTMLStencilElement {}
@@ -122,9 +122,9 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'hub-content-card': HTMLHubContentCardElement;
-    'hub-proximity-input': HTMLHubProximityInputElement;
-    'hub-proximity-map': HTMLHubProximityMapElement;
     'hub-radar': HTMLHubRadarElement;
+    'hub-radar-input': HTMLHubRadarInputElement;
+    'hub-radar-map': HTMLHubRadarMapElement;
     'hub-search': HTMLHubSearchElement;
     'hub-suggest-input': HTMLHubSuggestInputElement;
     'hub-topic': HTMLHubTopicElement;
@@ -137,7 +137,17 @@ declare namespace LocalJSX {
     'contentItem'?: IItem;
     'layout'?: string;
   }
-  interface HubProximityInput {
+  interface HubRadar {
+    'address'?: string;
+    'mapCenter'?: string;
+    'mapItem'?: any;
+    'mapItemData'?: any;
+    'mapZoom'?: string;
+    'messages'?: any;
+    'showMap'?: boolean;
+    'webmap'?: string;
+  }
+  interface HubRadarInput {
     /**
     * Default address to search
     */
@@ -151,20 +161,10 @@ declare namespace LocalJSX {
     */
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
   }
-  interface HubProximityMap {
+  interface HubRadarMap {
     'center'?: string;
     'webmap'?: string;
     'zoom'?: string;
-  }
-  interface HubRadar {
-    'address'?: string;
-    'mapCenter'?: string;
-    'mapItem'?: any;
-    'mapItemData'?: any;
-    'mapZoom'?: string;
-    'messages'?: any;
-    'showMap'?: boolean;
-    'webmap'?: string;
   }
   interface HubSearch {}
   interface HubSuggestInput {
@@ -206,9 +206,9 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'hub-content-card': HubContentCard;
-    'hub-proximity-input': HubProximityInput;
-    'hub-proximity-map': HubProximityMap;
     'hub-radar': HubRadar;
+    'hub-radar-input': HubRadarInput;
+    'hub-radar-map': HubRadarMap;
     'hub-search': HubSearch;
     'hub-suggest-input': HubSuggestInput;
     'hub-topic': HubTopic;
@@ -222,9 +222,9 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
-      'hub-proximity-input': LocalJSX.HubProximityInput & JSXBase.HTMLAttributes<HTMLHubProximityInputElement>;
-      'hub-proximity-map': LocalJSX.HubProximityMap & JSXBase.HTMLAttributes<HTMLHubProximityMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
+      'hub-radar-input': LocalJSX.HubRadarInput & JSXBase.HTMLAttributes<HTMLHubRadarInputElement>;
+      'hub-radar-map': LocalJSX.HubRadarMap & JSXBase.HTMLAttributes<HTMLHubRadarMapElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
       'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
       'hub-topic': LocalJSX.HubTopic & JSXBase.HTMLAttributes<HTMLHubTopicElement>;

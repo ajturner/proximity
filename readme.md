@@ -1,4 +1,4 @@
-# Proximity 
+# radar 
 
 Prototype tools for embedding nearby information into websites.
 

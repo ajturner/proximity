@@ -17,7 +17,7 @@ export const config: Config = {
   devServer: {
     root: "www"
   },  
-  namespace: 'proximity',
+  namespace: 'radar',
   outputTargets: [
     {
       type: 'dist',

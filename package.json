@@ -1,7 +1,7 @@
 {
-  "name": "proximity",
+  "name": "@esri/radar",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "ArcGIS Hub components for local exploration",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
@@ -9,7 +9,7 @@
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/proximity/proximity.js",
+  "unpkg": "dist/radar/radar.js",
   "files": [
     "dist/",
     "loader/"
@@ -24,7 +24,17 @@
   "devDependencies": {
     "@stencil/core": "^1.8.4"
   },
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajturner/radar.git"
+  },  
+  "contributors": [
+    {
+      "name": "Andrew Turner",
+      "email": "aturner@esri.com"
+    }
+  ],  
+  "license": "Apache-2.0",
   "dependencies": {
     "@esri/arcgis-rest-auth": "^2.8.1",
     "@esri/arcgis-rest-feature-layer": "^2.8.1",

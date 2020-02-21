@@ -1,12 +1,12 @@
 {
   "entries": [
-    "components/content-card/content-card.js",
-    "components/topic/topic.js",
+    "components/radar-map/radar-map.js",
     "components/hub-radar/hub-radar.js",
     "components/search/search.js",
-    "components/proximity-input/proximity-input.js",
-    "components/proximity-map/proximity-map.js",
-    "components/suggest-input/suggest-input.js"
+    "components/content-card/content-card.js",
+    "components/radar-input/radar-input.js",
+    "components/suggest-input/suggest-input.js",
+    "components/topic/topic.js"
   ],
   "compiler": {
     "name": "@stencil/core",

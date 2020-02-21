@@ -1,5 +1,5 @@
 import { Host, h } from "@stencil/core";
-import { getLocation, getMap, queryMap } from '../../utils/proximity-utils';
+import { getLocation, getMap, queryMap } from '../../utils/radar-utils';
 export class HubRadar {
     constructor() {
         this.showMap = true;
@@ -39,9 +39,9 @@ export class HubRadar {
             address: this.address,
             extent: this.mapItem ? this.mapItem.extent : null,
         };
-        output.push(h("hub-proximity-input", Object.assign({}, inputProps)));
+        output.push(h("hub-radar-input", Object.assign({}, inputProps)));
         if (this.showMap) {
-            output.push(h("hub-proximity-map", { class: "proximity-map", center: this.mapCenter, zoom: this.mapZoom, webmap: this.webmap }));
+            output.push(h("hub-radar-map", { class: "radar-map", center: this.mapCenter, zoom: this.mapZoom, webmap: this.webmap }));
         }
         if (this.isLoading) {
             output.push(h("calcite-loader", { text: "Scanning radar...", "is-active": true }));
