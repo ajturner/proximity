@@ -38,6 +38,7 @@ function getComponentFromExports(_module) {
 function getKnobForProp(prop, knobOptions = {}) {
 	let type = 'text';
 	let args = [prop.attribute];
+	console.debug("getKnobForProp", [prop, knobOptions])
 
 	// knob options can defined using camelCase or kebab-case
 	const propCamel = Case.camel(prop.attribute);
@@ -67,7 +68,7 @@ function getKnobForProp(prop, knobOptions = {}) {
     }
   }
 
-  console.log('generating', type, 'knob with args:', args);
+  	console.log('generating', type, 'knob with args:', args);
 
 	const val = KNOBS[type].apply(null, args);
 
@@ -292,7 +293,6 @@ function buildStencilStories(name, loader, componentsCtx, storiesCtx) {
   Object.keys(configs)
     .map(comp => configs[comp])
     .forEach(config => {
-		console.log('buildStencilStories', config)
 	typeof config === 'function'
         ? // If the config is a function, call it with the stories context.
           // The function is responsible for calling stories.add(...) manually.

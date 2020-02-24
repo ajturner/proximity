@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property      | Attribute     | Description                                             | Type       | Default                               |
-| ------------- | ------------- | ------------------------------------------------------- | ---------- | ------------------------------------- |
-| `extent`      | `extent`      | Geographic extent limit for geocoding                   | `any`      | `undefined`                           |
-| `placeholder` | `placeholder` | Value for input placeholder                             | `string`   | `'Search...'`                         |
-| `query`       | `query`       | Default search                                          | `string`   | `''`                                  |
-| `submit`      | `submit`      | Value for submit button                                 | `string`   | `'Search'`                            |
-| `suggestions` | --            | Values that the auto-complete textbox should search for | `string[]` | `['Alpha', 'Beta', 'Gamma', 'Delta']` |
+| Property      | Attribute     | Description                                             | Type       | Default                                      |
+| ------------- | ------------- | ------------------------------------------------------- | ---------- | -------------------------------------------- |
+| `extent`      | `extent`      | Geographic extent limit for geocoding                   | `any`      | `undefined`                                  |
+| `placeholder` | `placeholder` | Value for input placeholder                             | `string`   | `"What are you looking for?"`                |
+| `query`       | `query`       | Default search                                          | `string`   | `""`                                         |
+| `submit`      | `submit`      | Value for submit button                                 | `string`   | `"Start Search"`                             |
+| `suggestions` | --            | Values that the auto-complete textbox should search for | `string[]` | `['Apple', 'Avocado', 'Aardvark', 'Banana']` |
 
 
 ## Events

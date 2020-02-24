@@ -6,7 +6,7 @@ import { getLocation, suggestLocations } from '../../utils/radar-utils'
   styleUrl: 'radar-input.css',
   shadow: true
 })
-export class radarInput {
+export class RadarInput {
 
   @Element() element: HTMLElement;
 
@@ -24,6 +24,9 @@ export class radarInput {
 
   componentWillLoad() {
     this.inputAddress = this.address;
+    if(typeof(this.extent)  == "string" ) {
+      this.extent = JSON.parse(this.extent);
+    }
   }
 
   @Listen("queryInput")
@@ -32,20 +35,22 @@ export class radarInput {
 
     suggestLocations(this.inputAddress, this.extent).then( suggestions => {      
       this.addressSuggestions = Array.from(suggestions.suggestions, s => s['text'])
-    })
+    }).catch(error => {
+      console.error('Geocode error', error)
+    });
     return 'true';
   }
 
   @Listen("querySelect")
   querySelectHandler(event: CustomEvent): string {
-    console.log("radar-input querySelect", event)
+    console.debug("radar-input querySelect", event)
     getLocation(event.detail, this.extent).then(coordinates => {
       this.eventAddressUpdated.emit({
         'address': this.address,
         'coordinates': coordinates
       });
     }).catch(error => {
-      console.log('Geocode error', error)
+      console.error('Geocode error', error)
     });
     return 'true';
   }

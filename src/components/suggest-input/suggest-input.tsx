@@ -10,19 +10,19 @@ export class SuggestInput {
   @Element() element: HTMLElement;
 
   /** Default search */
-  @Prop({ mutable: true }) query: string = '';
+  @Prop({ mutable: true }) query: string = "";
 
   /** Geographic extent limit for geocoding */
   @Prop({ reflect: true }) extent: any;
 
   /** Value for input placeholder */
-  @Prop() placeholder: string = 'Search...';
+  @Prop() placeholder: string = "What are you looking for?";
 
   /** Value for submit button */
-  @Prop() submit: string = 'Search';
+  @Prop() submit: string = "Start Search";
 
   /** Values that the auto-complete textbox should search for */
-  @Prop() suggestions: Array<string> = ['Alpha', 'Beta', 'Gamma', 'Delta'];
+  @Prop() suggestions: Array<string> = ['Apple', 'Avocado', 'Aardvark', 'Banana'];
 
   /** Emits the query of the input result */
   @Event() querySelect: EventEmitter;

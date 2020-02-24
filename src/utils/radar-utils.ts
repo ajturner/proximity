@@ -17,7 +17,7 @@ export function suggestLocations(address: any, extent?: [Number[], Number[]]): P
         }
 
         suggest(address, geocodeOptions).then((suggestions) => {
-            console.log("suggestLocations", suggestions);
+            console.debug("suggestLocations", suggestions);
             resolve(suggestions);
         }).catch(reject)
     })
@@ -25,7 +25,7 @@ export function suggestLocations(address: any, extent?: [Number[], Number[]]): P
 
 export function getLocation(address: any, extent?: [Number[], Number[]]) {
     return new Promise((resolve, reject) => {
-        console.log("getLocation extent", extent)
+        console.debug("getLocation extent", extent)
 
         let geocodeOptions:IGeocodeOptions = {
             address: address,

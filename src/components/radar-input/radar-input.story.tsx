@@ -32,24 +32,18 @@ export default {
       // knobs.number('b-number', 46, { range: true, min: 46, max: 47, step: 1 });
       'address': {
         type: 'text',
-        args: ['Default address']
+        args: ['']
       }
     },
     states: [
         {
-            title: 'Here it is in a different state',
-            description: ' Note, the knobs only affect the "default" state at the top.',
+            title: 'Search by address',
+            description: 'Recommends locations within the geographic extent.',
             props: {
-              address: 'skyscrapers!!!'
+              address: '1600 Pennsylvania Ave',
+              extent: '[[-77.24, 38.80], [-76.86, 38.99]]'
             }
-          },
-          {
-            title: 'This is yet another state',
-            description: 'Note, the knobs only affect the "default" state at the top.',
-            props: {
-                address: 'green'
-            }
-        }
+          }
     ]
 
   }

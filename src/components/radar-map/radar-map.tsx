@@ -20,20 +20,20 @@ export class radarMap {
   
   @Watch('center')
   centerDidChangeHandler(newCenter: string) {
-    console.log("map: centerDidChangeHandler 1", [newCenter, this.esriMapView])
+    console.debug("map: centerDidChangeHandler 1", [newCenter, this.esriMapView])
     if(newCenter && this.esriMapView) {
       this.mapCenter = JSON.parse(newCenter);
-      console.log("map: centerDidChangeHandler 2", [this.mapCenter, this.mapZoom])
+      console.debug("map: centerDidChangeHandler 2", [this.mapCenter, this.mapZoom])
       this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }
   
   @Watch('zoom')
   zoomDidChangeHandler(newZoom: string) {
-    console.log("map: zoomDidChangeHandler 1", [newZoom, this.esriMapView])
+    console.debug("map: zoomDidChangeHandler 1", [newZoom, this.esriMapView])
     if(newZoom && this.esriMapView) {
      this.mapZoom = JSON.parse(newZoom);  
-     console.log("map: zoomDidChangeHandler 2", [this.mapCenter, this.mapZoom])
+     console.debug("map: zoomDidChangeHandler 2", [this.mapCenter, this.mapZoom])
      this.esriMapView.goTo({ zoom: this.mapZoom, center: this.mapCenter });
     }
   }  
