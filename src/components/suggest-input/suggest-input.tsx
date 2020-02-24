@@ -22,7 +22,7 @@ export class SuggestInput {
   @Prop() submit: string = 'Search';
 
   /** Values that the auto-complete textbox should search for */
-  @Prop() suggestions: Array<string> = [];
+  @Prop() suggestions: Array<string> = ['Alpha', 'Beta', 'Gamma', 'Delta'];
 
   /** Emits the query of the input result */
   @Event() querySelect: EventEmitter;

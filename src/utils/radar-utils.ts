@@ -150,11 +150,11 @@ function interpretResults(layer, results) {
     results.features.forEach((feature) => {
         let data = feature.attributes;
         // Template replace `{POP00001}` -> feature['POP00001']
-        var featureTitleInterpolated = featureTitle.replace(/\{(\w*)\}/g, (m,key) => {
+        var featureTitleInterpolated = featureTitle.replace(/\{(\w*)\}/g, (_m,key) => {
             return getValue(data, key, fields);
         });
         if(featureDescription !== null) {
-            var featureDescriptionInterpolated = featureDescription.replace(/\{(\w*)\}/g,(m,key) =>{
+            var featureDescriptionInterpolated = featureDescription.replace(/\{(\w*)\}/g,(_m,key) =>{
                 return getValue(data, key, fields);
             });
         }

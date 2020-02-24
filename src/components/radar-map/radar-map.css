@@ -1,3 +1,9 @@
+:host {
+  height: 100%;
+  min-height: 100%;  
+}
+
 .radar-map {
   height: 100%;
+  min-height: 100%;
 }

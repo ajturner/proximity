@@ -17,13 +17,13 @@ type ContentMetadata = {
 export class Topic {
 
   portalUrl: string = "http://www.arcgis.com/sharing/rest/"
-  @Prop({ attribute: 'item' }) item: string;
+  @Prop({ attribute: 'item' }) item: string = "";
   @Prop() image: string;
-  @Prop() name: string;
-  @Prop() description: string;
-  @Prop() contenttype: string;
-  @Prop() layout:string = 'horizontal'
-  @Prop() url:string;
+  @Prop() name: string = "Trash Day";
+  @Prop() description: string = "Monday";
+  @Prop() contenttype: string = "Local Topic";
+  @Prop() layout:string = "horizontal"
+  @Prop() url:string = "https://hub.arcgis.com";
   
   // @Prop() content:any;
   

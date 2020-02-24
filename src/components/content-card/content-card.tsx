@@ -8,7 +8,7 @@ import { getItem, IItem } from "@esri/arcgis-rest-portal";
 })
 export class ContentCard {
 
-  @Prop() content:string;
+  @Prop() content:string = "4f5c78bfe89a4304aec3a6cfd492d0cd";
   @Prop() layout:string = "horizontal";
   
   @Prop({ mutable: true }) contentItem: IItem = null; 

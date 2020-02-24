@@ -1,12 +1,14 @@
-import { Component, State, Prop, h, Element, Watch } from "@stencil/core";
+import { Component, State, Host, Prop, h, Element, Watch } from "@stencil/core";
 import { loadCss, loadModules } from "esri-loader";
 
+// TODO: why won't render() with shadow:true
 @Component({
   tag: "hub-radar-map",
   styleUrl: "radar-map.css",
-  shadow: false // Won't render() with true?
+  shadow: false 
 })
 export class radarMap {
+
   @Element() hostElement: HTMLElement;
   
   @Prop() webmap: string;
@@ -39,15 +41,15 @@ export class radarMap {
   /**
    * esri-loader options
    */
-  esriMapOptions = {
+  protected esriMapOptions = {
     url: `https://js.arcgis.com/4.14/`
   };
 
   /**
    * Properties to hold the map, mapview and featurelayer
    */
-  esriMap: __esri.Map;
-  esriMapView: __esri.MapView;
+  protected esriMap: __esri.Map;
+  protected esriMapView: __esri.MapView;
   // municipalitiesFeatureLayer: __esri.FeatureLayer;
 
   constructor() {
@@ -189,7 +191,11 @@ export class radarMap {
   // }
 
   render() {
-    return <div class="radar-map" />;
+    return (
+      <Host>
+        <div class="radar-map"></div>
+      </Host>
+    )
   }
 }
 
