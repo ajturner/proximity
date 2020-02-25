@@ -1,5 +1,5 @@
 import { Component, Host, State, h, Prop, Listen} from '@stencil/core';
-import { getLocation, getMap, queryMap } from '../../utils/radar-utils'
+import { getLocation, getMap, queryMap } from '../../utils/geo-utils'
 
 @Component({
   tag: 'hub-radar',

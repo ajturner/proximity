@@ -10,12 +10,82 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   IItem,
 } from '@esri/arcgis-rest-portal';
+import {
+  IUser,
+} from '@esri/arcgis-rest-common-types';
 
 export namespace Components {
+  interface HubButton {
+    /**
+    * action to trigger when the button is clicked
+    */
+    'action': Function;
+    /**
+    * Icon to display alongside the text
+    */
+    'icon': JSX.Element;
+    /**
+    * Button text to display
+    */
+    'text': string;
+  }
   interface HubContentCard {
     'content': string;
     'contentItem': IItem;
     'layout': string;
+  }
+  interface HubEventDetails {
+    'attending': boolean;
+    /**
+    * ClientID to identify the app launching OAuth
+    */
+    'clientid': string;
+    'eventDate': string;
+    'eventGroupId': string;
+    'eventOrganizer': JSX.Element;
+    'eventServiceUrl': string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'eventtitle': string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl': string;
+    /**
+    * Serialized authentication information.
+    */
+    'session': string;
+  }
+  interface HubFollowInitiative {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
+    /**
+    * Denotes whether the user is already following the configured initiative.
+    */
+    'following': boolean;
+    /**
+    * Follow icon
+    */
+    'icon': JSX.Element;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'initiativeid': string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl': string;
+    /**
+    * Serialized authentication information.
+    */
+    'session': string;
+    /**
+    * User metadata
+    */
+    'user': IUser;
   }
   interface HubRadar {
     'address': string;
@@ -79,10 +149,28 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLHubButtonElement extends Components.HubButton, HTMLStencilElement {}
+  var HTMLHubButtonElement: {
+    prototype: HTMLHubButtonElement;
+    new (): HTMLHubButtonElement;
+  };
+
   interface HTMLHubContentCardElement extends Components.HubContentCard, HTMLStencilElement {}
   var HTMLHubContentCardElement: {
     prototype: HTMLHubContentCardElement;
     new (): HTMLHubContentCardElement;
+  };
+
+  interface HTMLHubEventDetailsElement extends Components.HubEventDetails, HTMLStencilElement {}
+  var HTMLHubEventDetailsElement: {
+    prototype: HTMLHubEventDetailsElement;
+    new (): HTMLHubEventDetailsElement;
+  };
+
+  interface HTMLHubFollowInitiativeElement extends Components.HubFollowInitiative, HTMLStencilElement {}
+  var HTMLHubFollowInitiativeElement: {
+    prototype: HTMLHubFollowInitiativeElement;
+    new (): HTMLHubFollowInitiativeElement;
   };
 
   interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {}
@@ -121,7 +209,10 @@ declare global {
     new (): HTMLHubTopicElement;
   };
   interface HTMLElementTagNameMap {
+    'hub-button': HTMLHubButtonElement;
     'hub-content-card': HTMLHubContentCardElement;
+    'hub-event-details': HTMLHubEventDetailsElement;
+    'hub-follow-initiative': HTMLHubFollowInitiativeElement;
     'hub-radar': HTMLHubRadarElement;
     'hub-radar-input': HTMLHubRadarInputElement;
     'hub-radar-map': HTMLHubRadarMapElement;
@@ -132,10 +223,77 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface HubButton {
+    /**
+    * action to trigger when the button is clicked
+    */
+    'action'?: Function;
+    /**
+    * Icon to display alongside the text
+    */
+    'icon'?: JSX.Element;
+    /**
+    * Button text to display
+    */
+    'text'?: string;
+  }
   interface HubContentCard {
     'content'?: string;
     'contentItem'?: IItem;
     'layout'?: string;
+  }
+  interface HubEventDetails {
+    'attending'?: boolean;
+    /**
+    * ClientID to identify the app launching OAuth
+    */
+    'clientid'?: string;
+    'eventDate'?: string;
+    'eventGroupId'?: string;
+    'eventOrganizer'?: JSX.Element;
+    'eventServiceUrl'?: string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'eventtitle'?: string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl'?: string;
+    /**
+    * Serialized authentication information.
+    */
+    'session'?: string;
+  }
+  interface HubFollowInitiative {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
+    /**
+    * Denotes whether the user is already following the configured initiative.
+    */
+    'following'?: boolean;
+    /**
+    * Follow icon
+    */
+    'icon'?: JSX.Element;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'initiativeid'?: string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl'?: string;
+    /**
+    * Serialized authentication information.
+    */
+    'session'?: string;
+    /**
+    * User metadata
+    */
+    'user'?: IUser;
   }
   interface HubRadar {
     'address'?: string;
@@ -205,7 +363,10 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'hub-button': HubButton;
     'hub-content-card': HubContentCard;
+    'hub-event-details': HubEventDetails;
+    'hub-follow-initiative': HubFollowInitiative;
     'hub-radar': HubRadar;
     'hub-radar-input': HubRadarInput;
     'hub-radar-map': HubRadarMap;
@@ -221,7 +382,10 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'hub-button': LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
+      'hub-event-details': LocalJSX.HubEventDetails & JSXBase.HTMLAttributes<HTMLHubEventDetailsElement>;
+      'hub-follow-initiative': LocalJSX.HubFollowInitiative & JSXBase.HTMLAttributes<HTMLHubFollowInitiativeElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-radar-input': LocalJSX.HubRadarInput & JSXBase.HTMLAttributes<HTMLHubRadarInputElement>;
       'hub-radar-map': LocalJSX.HubRadarMap & JSXBase.HTMLAttributes<HTMLHubRadarMapElement>;

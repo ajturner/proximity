@@ -1,5 +1,5 @@
 import { Element, Listen, Component, Prop, State, Event, EventEmitter, h } from '@stencil/core';
-import { getLocation, suggestLocations } from '../../utils/radar-utils'
+import { getLocation, suggestLocations } from '../../utils/geo-utils'
 
 @Component({
   tag: 'hub-radar-input',
