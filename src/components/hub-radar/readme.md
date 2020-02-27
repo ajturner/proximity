@@ -13,9 +13,9 @@
 | `mapCenter`   | `map-center`    |             | `string`  | `undefined` |
 | `mapItem`     | `map-item`      |             | `any`     | `undefined` |
 | `mapItemData` | `map-item-data` |             | `any`     | `undefined` |
-| `mapZoom`     | `map-zoom`      |             | `string`  | `undefined` |
+| `mapZoom`     | `map-zoom`      |             | `number`  | `undefined` |
 | `messages`    | `messages`      |             | `any`     | `undefined` |
-| `showMap`     | `map`           |             | `boolean` | `true`      |
+| `showmap`     | `showmap`       |             | `boolean` | `true`      |
 | `webmap`      | `webmap`        |             | `string`  | `undefined` |
 
 
@@ -23,19 +23,19 @@
 
 ### Depends on
 
-- [hub-radar-input](../radar-input)
-- [hub-radar-map](../radar-map)
+- [hub-input](../hub-input)
+- [hub-map](../hub-map)
 - calcite-loader
-- [hub-topic](../topic)
+- [hub-card](../hub-card)
 
 ### Graph
 ```mermaid
 graph TD;
-  hub-radar --> hub-radar-input
-  hub-radar --> hub-radar-map
+  hub-radar --> hub-input
+  hub-radar --> hub-map
   hub-radar --> calcite-loader
-  hub-radar --> hub-topic
-  hub-radar-input --> hub-suggest-input
+  hub-radar --> hub-card
+  hub-input --> hub-suggest-input
   style hub-radar fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -29,12 +29,24 @@ export namespace Components {
     */
     'text': string;
   }
+  interface HubCard {
+    'contenttype': string;
+    'description': string;
+    'image': string;
+    'item': string;
+    /**
+    * Specify the layout of the card
+    */
+    'layout': "horizontal" | "vertical";
+    'name': string;
+    'url': string;
+  }
   interface HubContentCard {
     'content': string;
     'contentItem': IItem;
-    'layout': string;
+    'layout': "horizontal" | "vertical";
   }
-  interface HubEventDetails {
+  interface HubEvent {
     'attending': boolean;
     /**
     * ClientID to identify the app launching OAuth
@@ -57,7 +69,7 @@ export namespace Components {
     */
     'session': string;
   }
-  interface HubFollowInitiative {
+  interface HubFollowButton {
     /**
     * ClientID to identify the app launching auth
     */
@@ -87,17 +99,7 @@ export namespace Components {
     */
     'user': IUser;
   }
-  interface HubRadar {
-    'address': string;
-    'mapCenter': string;
-    'mapItem': any;
-    'mapItemData': any;
-    'mapZoom': string;
-    'messages': any;
-    'showMap': boolean;
-    'webmap': string;
-  }
-  interface HubRadarInput {
+  interface HubInput {
     /**
     * Default address to search
     */
@@ -107,10 +109,29 @@ export namespace Components {
     */
     'extent': any;
   }
-  interface HubRadarMap {
+  interface HubMap {
+    /**
+    * Center of the map, "[longitude, latitude]"
+    */
     'center': string;
+    /**
+    * Webmap Item configuration to load
+    */
     'webmap': string;
-    'zoom': string;
+    /**
+    * Map zoom level: 1=world ... 20=street
+    */
+    'zoom': number;
+  }
+  interface HubRadar {
+    'address': string;
+    'mapCenter': string;
+    'mapItem': any;
+    'mapItemData': any;
+    'mapZoom': number;
+    'messages': any;
+    'showmap': boolean;
+    'webmap': string;
   }
   interface HubSearch {}
   interface HubSuggestInput {
@@ -135,15 +156,6 @@ export namespace Components {
     */
     'suggestions': Array<string>;
   }
-  interface HubTopic {
-    'contenttype': string;
-    'description': string;
-    'image': string;
-    'item': string;
-    'layout': string;
-    'name': string;
-    'url': string;
-  }
 }
 
 declare global {
@@ -155,40 +167,46 @@ declare global {
     new (): HTMLHubButtonElement;
   };
 
+  interface HTMLHubCardElement extends Components.HubCard, HTMLStencilElement {}
+  var HTMLHubCardElement: {
+    prototype: HTMLHubCardElement;
+    new (): HTMLHubCardElement;
+  };
+
   interface HTMLHubContentCardElement extends Components.HubContentCard, HTMLStencilElement {}
   var HTMLHubContentCardElement: {
     prototype: HTMLHubContentCardElement;
     new (): HTMLHubContentCardElement;
   };
 
-  interface HTMLHubEventDetailsElement extends Components.HubEventDetails, HTMLStencilElement {}
-  var HTMLHubEventDetailsElement: {
-    prototype: HTMLHubEventDetailsElement;
-    new (): HTMLHubEventDetailsElement;
+  interface HTMLHubEventElement extends Components.HubEvent, HTMLStencilElement {}
+  var HTMLHubEventElement: {
+    prototype: HTMLHubEventElement;
+    new (): HTMLHubEventElement;
   };
 
-  interface HTMLHubFollowInitiativeElement extends Components.HubFollowInitiative, HTMLStencilElement {}
-  var HTMLHubFollowInitiativeElement: {
-    prototype: HTMLHubFollowInitiativeElement;
-    new (): HTMLHubFollowInitiativeElement;
+  interface HTMLHubFollowButtonElement extends Components.HubFollowButton, HTMLStencilElement {}
+  var HTMLHubFollowButtonElement: {
+    prototype: HTMLHubFollowButtonElement;
+    new (): HTMLHubFollowButtonElement;
+  };
+
+  interface HTMLHubInputElement extends Components.HubInput, HTMLStencilElement {}
+  var HTMLHubInputElement: {
+    prototype: HTMLHubInputElement;
+    new (): HTMLHubInputElement;
+  };
+
+  interface HTMLHubMapElement extends Components.HubMap, HTMLStencilElement {}
+  var HTMLHubMapElement: {
+    prototype: HTMLHubMapElement;
+    new (): HTMLHubMapElement;
   };
 
   interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {}
   var HTMLHubRadarElement: {
     prototype: HTMLHubRadarElement;
     new (): HTMLHubRadarElement;
-  };
-
-  interface HTMLHubRadarInputElement extends Components.HubRadarInput, HTMLStencilElement {}
-  var HTMLHubRadarInputElement: {
-    prototype: HTMLHubRadarInputElement;
-    new (): HTMLHubRadarInputElement;
-  };
-
-  interface HTMLHubRadarMapElement extends Components.HubRadarMap, HTMLStencilElement {}
-  var HTMLHubRadarMapElement: {
-    prototype: HTMLHubRadarMapElement;
-    new (): HTMLHubRadarMapElement;
   };
 
   interface HTMLHubSearchElement extends Components.HubSearch, HTMLStencilElement {}
@@ -202,23 +220,17 @@ declare global {
     prototype: HTMLHubSuggestInputElement;
     new (): HTMLHubSuggestInputElement;
   };
-
-  interface HTMLHubTopicElement extends Components.HubTopic, HTMLStencilElement {}
-  var HTMLHubTopicElement: {
-    prototype: HTMLHubTopicElement;
-    new (): HTMLHubTopicElement;
-  };
   interface HTMLElementTagNameMap {
     'hub-button': HTMLHubButtonElement;
+    'hub-card': HTMLHubCardElement;
     'hub-content-card': HTMLHubContentCardElement;
-    'hub-event-details': HTMLHubEventDetailsElement;
-    'hub-follow-initiative': HTMLHubFollowInitiativeElement;
+    'hub-event': HTMLHubEventElement;
+    'hub-follow-button': HTMLHubFollowButtonElement;
+    'hub-input': HTMLHubInputElement;
+    'hub-map': HTMLHubMapElement;
     'hub-radar': HTMLHubRadarElement;
-    'hub-radar-input': HTMLHubRadarInputElement;
-    'hub-radar-map': HTMLHubRadarMapElement;
     'hub-search': HTMLHubSearchElement;
     'hub-suggest-input': HTMLHubSuggestInputElement;
-    'hub-topic': HTMLHubTopicElement;
   }
 }
 
@@ -237,12 +249,24 @@ declare namespace LocalJSX {
     */
     'text'?: string;
   }
+  interface HubCard {
+    'contenttype'?: string;
+    'description'?: string;
+    'image'?: string;
+    'item'?: string;
+    /**
+    * Specify the layout of the card
+    */
+    'layout'?: "horizontal" | "vertical";
+    'name'?: string;
+    'url'?: string;
+  }
   interface HubContentCard {
     'content'?: string;
     'contentItem'?: IItem;
-    'layout'?: string;
+    'layout'?: "horizontal" | "vertical";
   }
-  interface HubEventDetails {
+  interface HubEvent {
     'attending'?: boolean;
     /**
     * ClientID to identify the app launching OAuth
@@ -265,7 +289,7 @@ declare namespace LocalJSX {
     */
     'session'?: string;
   }
-  interface HubFollowInitiative {
+  interface HubFollowButton {
     /**
     * ClientID to identify the app launching auth
     */
@@ -295,17 +319,7 @@ declare namespace LocalJSX {
     */
     'user'?: IUser;
   }
-  interface HubRadar {
-    'address'?: string;
-    'mapCenter'?: string;
-    'mapItem'?: any;
-    'mapItemData'?: any;
-    'mapZoom'?: string;
-    'messages'?: any;
-    'showMap'?: boolean;
-    'webmap'?: string;
-  }
-  interface HubRadarInput {
+  interface HubInput {
     /**
     * Default address to search
     */
@@ -319,10 +333,29 @@ declare namespace LocalJSX {
     */
     'onEventAddressUpdated'?: (event: CustomEvent<any>) => void;
   }
-  interface HubRadarMap {
+  interface HubMap {
+    /**
+    * Center of the map, "[longitude, latitude]"
+    */
     'center'?: string;
+    /**
+    * Webmap Item configuration to load
+    */
     'webmap'?: string;
-    'zoom'?: string;
+    /**
+    * Map zoom level: 1=world ... 20=street
+    */
+    'zoom'?: number;
+  }
+  interface HubRadar {
+    'address'?: string;
+    'mapCenter'?: string;
+    'mapItem'?: any;
+    'mapItemData'?: any;
+    'mapZoom'?: number;
+    'messages'?: any;
+    'showmap'?: boolean;
+    'webmap'?: string;
   }
   interface HubSearch {}
   interface HubSuggestInput {
@@ -352,27 +385,18 @@ declare namespace LocalJSX {
     */
     'suggestions'?: Array<string>;
   }
-  interface HubTopic {
-    'contenttype'?: string;
-    'description'?: string;
-    'image'?: string;
-    'item'?: string;
-    'layout'?: string;
-    'name'?: string;
-    'url'?: string;
-  }
 
   interface IntrinsicElements {
     'hub-button': HubButton;
+    'hub-card': HubCard;
     'hub-content-card': HubContentCard;
-    'hub-event-details': HubEventDetails;
-    'hub-follow-initiative': HubFollowInitiative;
+    'hub-event': HubEvent;
+    'hub-follow-button': HubFollowButton;
+    'hub-input': HubInput;
+    'hub-map': HubMap;
     'hub-radar': HubRadar;
-    'hub-radar-input': HubRadarInput;
-    'hub-radar-map': HubRadarMap;
     'hub-search': HubSearch;
     'hub-suggest-input': HubSuggestInput;
-    'hub-topic': HubTopic;
   }
 }
 
@@ -383,15 +407,15 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'hub-button': LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
+      'hub-card': LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
-      'hub-event-details': LocalJSX.HubEventDetails & JSXBase.HTMLAttributes<HTMLHubEventDetailsElement>;
-      'hub-follow-initiative': LocalJSX.HubFollowInitiative & JSXBase.HTMLAttributes<HTMLHubFollowInitiativeElement>;
+      'hub-event': LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
+      'hub-follow-button': LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
+      'hub-input': LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
+      'hub-map': LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
-      'hub-radar-input': LocalJSX.HubRadarInput & JSXBase.HTMLAttributes<HTMLHubRadarInputElement>;
-      'hub-radar-map': LocalJSX.HubRadarMap & JSXBase.HTMLAttributes<HTMLHubRadarMapElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
       'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
-      'hub-topic': LocalJSX.HubTopic & JSXBase.HTMLAttributes<HTMLHubTopicElement>;
     }
   }
 }

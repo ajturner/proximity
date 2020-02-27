@@ -258,7 +258,7 @@ function buildGeneratorConfigs(componentsCtx, storiesCtx) {
           [Component.name]: _export
         });
       }
-
+	  console.log("stencil", _export)
       return Object.assign(obj, {
         [Component.name]: {
           Component,
@@ -289,7 +289,7 @@ function buildStencilStories(name, loader, componentsCtx, storiesCtx) {
 
   const stories = storiesOf(name, module);
   stories.addDecorator(KNOBS.withKnobs);
-
+  
   Object.keys(configs)
     .map(comp => configs[comp])
     .forEach(config => {

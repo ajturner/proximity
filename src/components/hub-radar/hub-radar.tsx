@@ -12,12 +12,12 @@ export class HubRadar {
   @Prop() mapItem: any; //PortalItem
   @Prop() mapItemData: any; //PortalItem
   @Prop() mapCenter: string;
-  @Prop() mapZoom: string;
+  @Prop() mapZoom: number;
   @Prop() messages: any;
 
   @Prop({ mutable: true }) address: string;
   @Prop() webmap: string;
-  @Prop({ attribute: 'map' }) showMap: boolean = true;
+  @Prop() showmap: boolean = true;
 
   @State() isLoading: boolean = false;
 
@@ -30,7 +30,7 @@ export class HubRadar {
     this.address = address;
 
     this.mapCenter = `[${coordinates['x']}, ${coordinates['y']}]`;
-    this.mapZoom = "16";
+    this.mapZoom = 16;
 
     this.isLoading = true;
     queryMap(this.mapItemData, coordinates).then(results => {
@@ -65,10 +65,10 @@ export class HubRadar {
       address: this.address,
       extent: this.mapItem ? this.mapItem.extent : null,
     };
-    output.push(<hub-radar-input {...inputProps}></hub-radar-input>)
+    output.push(<hub-input {...inputProps}></hub-input>)
 
-    if(this.showMap) {
-      output.push(<hub-radar-map class="radar-map" center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-radar-map>)
+    if(this.showmap) {
+      output.push(<div class="radar-map"><hub-map center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-map></div>)
     }
     if(this.isLoading) {
       output.push(<calcite-loader text="Scanning radar..." is-active></calcite-loader>)
@@ -78,7 +78,7 @@ export class HubRadar {
         output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
           output.push(
-            <hub-topic contenttype={m.title} name={m.description ? m.description : "<em>None</em>"}></hub-topic>
+            <hub-card contenttype={m.title} name={m.description ? m.description : "<em>None</em>"}></hub-card>
           )
         })
         // output.push( <slot name="after-results" /> )        
