@@ -18,6 +18,7 @@ graph TD;
   hub-search --> hub-suggest-input
   hub-search --> hub-content-card
   hub-content-card --> hub-card
+  hub-card --> hub-button
   style hub-search fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

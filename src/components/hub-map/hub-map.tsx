@@ -48,7 +48,9 @@ export class HubMap {
   }  
 
   componentWillLoad() {
-    this.mapCenter = JSON.parse(this.center)
+    if(this.center) {
+      this.mapCenter = JSON.parse(this.center)
+    }
   }
 
   /**

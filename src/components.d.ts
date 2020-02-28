@@ -30,6 +30,8 @@ export namespace Components {
     'text': string;
   }
   interface HubCard {
+    'buttonAction': Function;
+    'buttonText': string;
     'contenttype': string;
     'description': string;
     'image': string;
@@ -42,6 +44,7 @@ export namespace Components {
     'url': string;
   }
   interface HubContentCard {
+    'actionButton': any;
     'content': string;
     'contentItem': IItem;
     'layout': "horizontal" | "vertical";
@@ -54,8 +57,9 @@ export namespace Components {
     'clientid': string;
     'eventDate': string;
     'eventGroupId': string;
-    'eventOrganizer': JSX.Element;
+    'eventOrganizer': string;
     'eventServiceUrl': string;
+    'eventUrl': string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
@@ -250,6 +254,8 @@ declare namespace LocalJSX {
     'text'?: string;
   }
   interface HubCard {
+    'buttonAction'?: Function;
+    'buttonText'?: string;
     'contenttype'?: string;
     'description'?: string;
     'image'?: string;
@@ -262,6 +268,7 @@ declare namespace LocalJSX {
     'url'?: string;
   }
   interface HubContentCard {
+    'actionButton'?: any;
     'content'?: string;
     'contentItem'?: IItem;
     'layout'?: "horizontal" | "vertical";
@@ -274,8 +281,9 @@ declare namespace LocalJSX {
     'clientid'?: string;
     'eventDate'?: string;
     'eventGroupId'?: string;
-    'eventOrganizer'?: JSX.Element;
+    'eventOrganizer'?: string;
     'eventServiceUrl'?: string;
+    'eventUrl'?: string;
     /**
     * identifier for the ArcGIS Hub initiative
     */

@@ -13,8 +13,9 @@
 | `clientid`        | `clientid`          | ClientID to identify the app launching OAuth | `string`  | `undefined`                |
 | `eventDate`       | `event-date`        |                                              | `string`  | `undefined`                |
 | `eventGroupId`    | `event-group-id`    |                                              | `string`  | `undefined`                |
-| `eventOrganizer`  | `event-organizer`   |                                              | `any`     | `undefined`                |
+| `eventOrganizer`  | `event-organizer`   |                                              | `string`  | `undefined`                |
 | `eventServiceUrl` | `event-service-url` |                                              | `string`  | `undefined`                |
+| `eventUrl`        | `event-url`         |                                              | `string`  | `undefined`                |
 | `eventtitle`      | `eventtitle`        | identifier for the ArcGIS Hub initiative     | `string`  | `undefined`                |
 | `orgurl`          | `orgurl`            | url of the ArcGIS Online organization        | `string`  | `"https://www.arcgis.com"` |
 | `session`         | `session`           | Serialized authentication information.       | `string`  | `undefined`                |
@@ -24,12 +25,13 @@
 
 ### Depends on
 
-- [hub-button](../hub-button)
+- [hub-card](../hub-card)
 
 ### Graph
 ```mermaid
 graph TD;
-  hub-event --> hub-button
+  hub-event --> hub-card
+  hub-card --> hub-button
   style hub-event fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -50,7 +50,7 @@ export class HubEvent {
   /**
    *
    */
-  @Prop({ mutable: true }) eventOrganizer: JSX.Element;
+  @Prop({ mutable: true }) eventOrganizer: string;
 
   /**
    *
@@ -66,6 +66,11 @@ export class HubEvent {
    *
    */
   @Prop({ mutable: true }) attending: boolean;
+
+   /**
+   *
+   */
+  @Prop({ mutable: true }) eventUrl: string;
 
   /**
    * Text to display on the button
@@ -130,6 +135,8 @@ export class HubEvent {
   }
 
   componentDidLoad() {
+    let hubUrl = this.orgurl.replace('maps', 'hub');
+    // const hubAPI = 'https://hub.arcgis.com/api/v3/events/BBpPn9wZu2D6eTNY/Hub%20Events%20(public)/FeatureServer/0/95/attachments/40'
     getPortal(null, {
       portal: `${this.orgurl}/sharing/rest/`
     })
@@ -146,6 +153,8 @@ export class HubEvent {
                       this.eventDate = new Date(eventDetails.startDate).toString();
                       this.eventGroupId = eventDetails.groupId;
                       this.eventOrganizer = this.digOutContactInfo(eventDetails);
+                      this.eventUrl = `${hubUrl}/events/${eventDetails.url}`
+                      // this.eventImage = `${eventServiceUrl}/${eventDetails.OBJECTID}/attachments`
                       break;
                     }
                   }
@@ -155,28 +164,27 @@ export class HubEvent {
         })
   }
 
-  digOutContactInfo(details:any):JSX.Element {
+  digOutContactInfo(details:any):string {
     const organizers:any = JSON.parse(details.organizers);
     if (organizers.length > 0) {
       const contact = `mailto:${organizers[0].contact}`
-      return <p>organized by: <a href={contact}>{organizers[0].name}</a></p>
+
+      return `<p>organized by: <a href=${contact}>${organizers[0].name}</a></p>`
     }
   }
 
   render() {
-    return <div class="hub-event-details">
-      <div class="hub-event-background-image"></div>
-      <div class="hub-event-content">
-        <h3>{this.eventtitle}</h3>
-        <p>{this.eventDate}</p>
-        <p>{this.eventOrganizer}</p>
-      </div>
-      <div class="hub-event-footer">
-        <hub-button
-          text={this.callToActionText}
-          action={this.triggerRegister}>
-        </hub-button>
-      </div>
-    </div>;
+    let description = `<p>${this.eventDate}</p><p>${this.eventOrganizer}</p>`
+
+    return (
+      <hub-card
+        name={this.eventtitle}
+        contenttype="Event"
+        url={this.eventUrl}
+        description={description}
+        buttonText={this.callToActionText}
+        buttonAction={this.triggerRegister}
+    ></hub-card>
+    );
   }
 }

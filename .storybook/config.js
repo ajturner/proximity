@@ -60,7 +60,7 @@ addParameters({
      * sorts stories
      * @type {Boolean}
      */
-    sortStoriesByKind: false,
+    sortStoriesByKind: true,
     /**
      * regex for finding the hierarchy separator
      * @example:

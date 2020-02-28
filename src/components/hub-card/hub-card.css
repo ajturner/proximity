@@ -4,7 +4,7 @@
   font-size: 16px;
 }
 
-.content-card {
+.hub-content-card {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -12,66 +12,76 @@
   border: 1px solid #EEE;
   position: relative;
 }
+
+.hub-content-footer {
+  grid-area: footer;
+  padding: 0 0 10px 60px;
+} 
 /* Make the entire card clickable */
-.content-card a {
+/* a.hub-content-link {
   position: absolute;
   height: 100%;
   width: 100%;
   z-index: 1;
 }
-.content-card .content-summary, .content-card .content-title, .content-card .content-metadata {
-  pointer-events: none;  /* IMPORTANT! Lets clicks fall through */
+.hub-content-card .hub-content-summary, .hub-content-card .hub-content-title, .hub-content-card .hub-content-metadata {
+  pointer-events: none; 
   position: relative;
-  z-index: 10;         /* IMPORTANT! Makes actual content be on top of linked card */
-}
+  z-index: 10;
+}  */
 
-/* &:hover ~ .content-card .content-title {
-  text-decoration: underline;
-} */
+
 /* On mouse-over, add a deeper shadow */
-.content-card:hover {
+.hub-content-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.content-title {
+.hub-content-title {
   font: #101f28 !important;
   font-size: 1rem;
   font-weight: 700;
 }
+.hub-content-url {
+  text-decoration: none;
+  color: black;
+}
+.hub-content-url:hover {
+  text-decoration: underline;
+}
 
-.content-summary, .content-type {
+.hub-content-summary, .hub-content-type {
   font-size: 0.9rem;
   color: rgb(102, 102, 102);
   /* margin: 0.5em 0 0 0; */
 }
 
-.layout-vertical.content-card {
+.layout-vertical.hub-content-card {
   width: 250px;
 }
 /* .layout-vertical .content-container {
   flex-direction: column;
   width: 100%;  
 } */
-.layout-vertical .content-image {
+.layout-vertical .hub-content-image {
   height: 150px;
   flex: 0 0 auto;
 }
-.layout-vertical img.content-image {
+.layout-vertical img.hub-content-image {
   width: 100%;
   object-fit: cover;
 }
-.content-metadata {
+.hub-content-metadata {
   margin: 0.5rem 0.8rem;
 }
 
-.layout-horizontal.content-card {
+.layout-horizontal.hub-content-card {
   display: flex;
 }
-.layout-horizontal .content-image {
+.layout-horizontal .hub-content-image {
   display: flex;
   flex: 0 0 150px;
 }
-.layout-horizontal .content-metadata {
+.layout-horizontal .hub-content-metadata {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -79,7 +89,7 @@
 }
 
 
-.content-details {
+.hub-content-details {
   color: #4c4c4c;
   font-size: 0.8em;
   box-shadow: 0 -1px #ccc;
@@ -90,23 +100,3 @@
   flex: 1 auto;
   display: grid;
 }
-/* #details {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  grid-gap: 10px;
-  grid-auto-flow: dense;
-  list-style: none;
-  margin: 1em auto;
-  padding: 0;
-  max-width: 800px;
-  color: rgb(102, 102, 102);  
-}
-#details li.landscape {
-  grid-column-end: span 2;
-}
-#details li img {
- display: block;
- object-fit: cover;
- width: 100%;
- height: 100%;
-} */

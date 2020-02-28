@@ -125,7 +125,7 @@ export class HubSuggestInput {
       && suggestion === this.suggestionArr[this.selectedSuggestionIndex];
     return (
       <li
-        class={'suggestions-li ' + (isSelected ? 'suggestions-selected': '')}
+        class={'hub-suggestions-li ' + (isSelected ? 'hub-suggestions-selected': '')}
         onClick={() => this.onSelect(suggestion)}
       >
         {suggestion}
@@ -135,11 +135,11 @@ export class HubSuggestInput {
 
   render() {
     return (
-      <div class='suggestions-div'>
-        <form id='annotation-form' onSubmit={(e) => this.onSubmit(e)}>
+      <div class='hub-suggestions-div'>
+        <form onSubmit={(e) => this.onSubmit(e)}>
           <slot name="before-input" />
           <input
-            class='suggestions-input'
+            class='hub-suggestions-input'
             type='text'
             placeholder={this.placeholder}
             value={this.inputQuery}
@@ -148,10 +148,10 @@ export class HubSuggestInput {
             onKeyDown={e => this.onKeyDown(e)}
             onKeyPress={e => this.onKeyPress(e)}
           />
-          <ul class='suggestions-ul' role='listbox' hidden={!this.showSuggestions}>
+          <ul class='hub-suggestions-ul' role='listbox' hidden={!this.showSuggestions}>
             {this.suggestionArr.map(suggestion => this.getSuggestionElement(suggestion))}
           </ul>
-          <input type='submit' value={this.submit} />
+          <input class="hub-suggest-input-submit" type='submit' value={this.submit} />
         </form>
       </div>  
     );

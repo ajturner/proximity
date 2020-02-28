@@ -40,6 +40,11 @@ export class HubRadar {
   }
 
   componentWillLoad() {
+
+  }
+
+  componentDidLoad() {
+    // Load the map after the component renders so the map is available
     getMap(this.webmap).then(([mapItem, mapItemData]) => {
       this.mapItem = mapItem;
       this.mapItemData = mapItemData;
@@ -52,11 +57,8 @@ export class HubRadar {
           console.log('Geocode error', error)
         });
       }      
-    });
-
-
+    });    
   }
-
 
   render() {
     let output = []
@@ -78,7 +80,7 @@ export class HubRadar {
         output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
           output.push(
-            <hub-card contenttype={m.title} name={m.description ? m.description : "<em>None</em>"}></hub-card>
+            <hub-card layout="horizontal" contenttype={m.title} name={m.description ? m.description : "<em>None</em>"}></hub-card>
           )
         })
         // output.push( <slot name="after-results" /> )        

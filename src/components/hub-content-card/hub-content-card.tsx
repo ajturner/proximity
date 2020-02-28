@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Element, State } from '@stencil/core';
 import { getItem, IItem } from "@esri/arcgis-rest-portal";
 
 @Component({
@@ -12,6 +12,11 @@ export class HubContentCard {
   @Prop() layout: "horizontal" | "vertical" = "vertical";
   
   @Prop({ mutable: true }) contentItem: IItem = null; 
+
+  @Prop() actionButton; 
+
+  @Element() host: HTMLDivElement;
+  @State() children: Array<any> = [];
 
   componentWillLoad() {
     if(this.contentItem === null) {
@@ -35,7 +40,8 @@ export class HubContentCard {
           name={this.contentItem.title} 
           description={this.contentItem.snippet}
           // content={this.content}
-        ></hub-card> 
+        >
+        </hub-card> 
       )
     }
     return (
